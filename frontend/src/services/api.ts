@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_API_URL || 'https://ayush-fhir-backend.railway.app',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const apiEndpoints = {
   
   // Translation
   translateCode: (code: string, system: 'NAMASTE' | 'ICD-11-TM2') =>
-    api.post('/api/terminology', { code, system }),
+    api.post('/api/translation', { code, system }),
   
   // FHIR
   getCodeSystem: () => api.get('/api/fhir/CodeSystem/namaste'),

@@ -45,7 +45,7 @@ const SearchPage: React.FC = () => {
   }, [query]);
 
   // Fetch search results
-  const { data: searchResults, isLoading, error } = useQuery(
+  const { data: searchResults, isLoading, error } = useQuery<SearchResult[]>(
     ['search', debouncedQuery, categoryFilter],
     () => apiEndpoints.searchTerms(debouncedQuery, { category: categoryFilter || undefined }),
     {

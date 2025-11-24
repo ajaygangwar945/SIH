@@ -1,17 +1,17 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Layout from './components/Layout/Layout.tsx';
-import LoadingSpinner from './components/Common/LoadingSpinner.tsx';
+import Layout from './components/Layout/Layout';
+import LoadingSpinner from './components/Common/LoadingSpinner';
 
 // Lazy load components for better performance
-const Dashboard = React.lazy(() => import('./pages/Dashboard.tsx'));
-const SearchPage = React.lazy(() => import('./pages/SearchPage.tsx'));
-const TranslationPage = React.lazy(() => import('./pages/TranslationPage.tsx'));
-const FHIRPage = React.lazy(() => import('./pages/FHIRPage.tsx'));
-const AdminPage = React.lazy(() => import('./pages/AdminPage.tsx'));
-const AuthPage = React.lazy(() => import('./pages/AuthPage.tsx'));
-const AnalyticsPage = React.lazy(() => import('./pages/AnalyticsPage.tsx'));
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const SearchPage = React.lazy(() => import('./pages/SearchPage'));
+const TranslationPage = React.lazy(() => import('./pages/TranslationPage'));
+const FHIRPage = React.lazy(() => import('./pages/FHIRPage'));
+const AdminPage = React.lazy(() => import('./pages/AdminPage'));
+const AuthPage = React.lazy(() => import('./pages/AuthPage'));
+const AnalyticsPage = React.lazy(() => import('./pages/AnalyticsPage'));
 
 const App: React.FC = () => {
   return (

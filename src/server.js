@@ -93,25 +93,30 @@ class AyushFHIRServer {
       });
     });
 
-    // Serve static HTML files for the root and specific paths
+    // API root metadata
     this.app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/index.html'));
-    });
-    this.app.get('/search', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/search.html'));
-    });
-    this.app.get('/ingest', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/ingest.html'));
-    });
-    this.app.get('/fhir', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/fhir.html'));
+      res.json({
+        name: 'Ayush FHIR Microservice',
+        version: '1.0.0',
+        status: 'healthy',
+        documentation: '/docs',
+        endpoints: {
+          health: '/health',
+          terminology: '/api/terminology',
+          translation: '/api/translation',
+          fhir: '/fhir',
+          admin: '/admin',
+          auth: '/auth'
+        },
+        timestamp: new Date().toISOString()
+      });
     });
 
     // Basic terminology endpoints (Day 1 MVP)
     this.setupBasicTerminologyRoutes();
 
     // Translation endpoints
-    this.app.use('/api/terminology', translationRoutes(this.dataStore)); // Changed to /api/terminology
+    this.app.use('/api/translation', translationRoutes(this.dataStore));
 
     // ICD-11 endpoints
     this.app.use('/api/icd', icdRoutes(this.icdService));
@@ -119,8 +124,8 @@ class AyushFHIRServer {
     // Auth endpoints
     this.app.use('/auth', authRoutes());
 
-    // FHIR endpoints
-    this.app.use('/api/fhir', fhirRoutes(this.fhirService)); // Changed to /api/fhir
+    // FHIR endpoints (support legacy and new base paths)
+    this.app.use(['/api/fhir', '/fhir'], fhirRoutes(this.fhirService));
 
     // Admin endpoints
     this.app.use('/admin', adminRoutes(this.dataStore, this.csvParser));
@@ -270,7 +275,6 @@ class AyushFHIRServer {
    */
   setupErrorHandling() {
 
-
     // 404 handler
     this.app.use('*', (req, res) => {
       res.status(404).json({
@@ -305,7 +309,7 @@ class AyushFHIRServer {
       const storeResult = this.dataStore.storeTerms(parseResult.terms);
       
       console.log(`Loaded ${storeResult.stored} terms from sample data`);
-      
+
       // Start server
       this.app.listen(this.port, () => {
         console.log(`🚀 Ayush FHIR Microservice running on port ${this.port}`);
@@ -320,10 +324,11 @@ class AyushFHIRServer {
   }
 }
 
-// Start server if this file is run directly
+// Export the server class for test usage
+module.exports = AyushFHIRServer;
+
+// Start the server when this file is executed directly
 if (require.main === module) {
   const server = new AyushFHIRServer();
   server.start();
 }
-
-module.exports = AyushFHIRServer;

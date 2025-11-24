@@ -12,8 +12,6 @@ import {
   Globe
 } from 'lucide-react';
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,

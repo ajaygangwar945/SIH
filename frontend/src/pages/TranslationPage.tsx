@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import { 
   Languages, 
   ArrowRight, 
-  ArrowLeft,
   Copy,
   Check,
   ExternalLink,
@@ -36,7 +35,7 @@ const TranslationPage: React.FC = () => {
   const [copiedText, setCopiedText] = useState<string>('');
 
   // Translation mutation
-  const translateMutation = useMutation(
+  const translateMutation = useMutation<{ data: TranslationResponse }, Error, { code: string; system: string }>(
     (data: { code: string; system: string }) => apiEndpoints.translateCode(data.code, data.system),
     {
       onSuccess: () => {

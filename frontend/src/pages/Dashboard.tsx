@@ -30,6 +30,12 @@ const Dashboard: React.FC = () => {
     { refetchInterval: 60000 }
   );
 
+  const isSystemHealthy = healthData?.status === 'healthy';
+  const systemStatusLabel = isSystemHealthy ? 'Healthy' : 'Needs Attention';
+  const environmentLabel = healthData?.services?.environment
+    ? healthData.services.environment.replace(/^\w/, (c: string) => c.toUpperCase())
+    : 'Development';
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -90,7 +96,13 @@ const Dashboard: React.FC = () => {
                 <Activity className="h-6 w-6" />
                 <div>
                   <p className="text-sm text-white text-opacity-80">System Status</p>
-                  <p className="text-2xl font-bold text-green-300">Healthy</p>
+                  <p
+                    className={`text-2xl font-bold ${
+                      isSystemHealthy ? 'text-green-300' : 'text-red-300'
+                    }`}
+                  >
+                    {systemStatusLabel}
+                  </p>
                 </div>
               </div>
             </div>
@@ -99,8 +111,8 @@ const Dashboard: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <Globe className="h-6 w-6" />
                 <div>
-                  <p className="text-sm text-white text-opacity-80">ICD-11 API</p>
-                  <p className="text-2xl font-bold text-green-300">Online</p>
+                  <p className="text-sm text-white text-opacity-80">Environment</p>
+                  <p className="text-2xl font-bold text-green-300">{environmentLabel}</p>
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Menu, 
@@ -15,8 +15,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const location = useLocation();
-
   return (
     <motion.header 
       initial={{ y: -100 }}

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Layout from './components/Layout/Layout';
+import Layout from './components/Layout/Layout.tsx';
 import LoadingSpinner from './components/Common/LoadingSpinner';
 
 // Lazy load components for better performance

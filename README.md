@@ -1,38 +1,60 @@
-# 🏥 Ayush FHIR Integration Platform
+<div align="center">
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-![Status](https://img.shields.io/badge/status-Active-success.svg)
+# 🏥 Ayush FHIR Integration Platform  
+### 🌿 Bridging Traditional Ayush Systems with Modern Healthcare Standards
 
-> **Seamlessly integrating Ayush systems with the FHIR standard for interoperable healthcare data.**
+![Status](https://img.shields.io/badge/Status-Active-success?style=flat)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=flat)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat)
+![FHIR](https://img.shields.io/badge/HL7-FHIR_R4-orange?style=flat)
+![Healthcare](https://img.shields.io/badge/Domain-Healthcare-blueviolet?style=flat)
+
+
+</div>
 
 ---
 
 ## 🌟 Overview
 
-The **Ayush FHIR Integration Platform** is a robust solution designed to bridge the gap between traditional Ayush systems and modern healthcare interoperability standards. By leveraging **HL7 FHIR**, we enable seamless data exchange, ensuring that Ayush health records are accessible, secure, and standardized.
+The **Ayush FHIR Integration Platform** is a robust healthcare interoperability solution designed to bridge the gap between **traditional Ayush medical systems** and **modern digital health ecosystems**.
+
+By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the platform ensures that Ayush health records are:
+- 📄 Standardized  
+- 🔐 Secure  
+- 🔄 Interoperable  
+- 🌍 Exchangeable across healthcare systems  
+
+This enables better continuity of care, data sharing, and integration with national and global health infrastructures.
+
+---
 
 ## 🚀 Key Features
 
 | Feature | Description |
-| :--- | :--- |
-| 🔄 **Data Transformation** | Convert legacy Ayush data formats into standard FHIR resources. |
-| 🛡️ **Secure Auth** | Robust authentication and authorization using JWT and secure practices. |
-| 📊 **Analytics Dashboard** | Visual insights into data processing, success rates, and system health. |
-| 🔍 **Advanced Search** | Powerful search capabilities to query patient records and resources. |
-| 🌐 **API-First Design** | RESTful APIs for easy integration with other healthcare systems. |
+|------|-------------|
+| 🔄 **FHIR Data Transformation** | Converts legacy Ayush data formats into standard FHIR resources |
+| 🛡️ **Secure Authentication** | JWT-based authentication with secure access control |
+| 📊 **Analytics Dashboard** | Visual insights into data flow, success rates, and system health |
+| 🔍 **Advanced Search** | Efficient querying of patient records and healthcare resources |
+| 🌐 **API-First Architecture** | RESTful APIs for seamless system-to-system integration |
+
+---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+### 🎨 Frontend
+![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-### Backend
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+### ⚙️ Backend
+![Node.js](https://img.shields.io/badge/Node.js-18+-43853D?style=flat&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-API-black?style=flat)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-4EA94B?style=flat&logo=mongodb&logoColor=white)
+
+### 🧬 Standards & APIs
+![HL7](https://img.shields.io/badge/HL7-FHIR_R4-orange?style=flat)
+![JWT](https://img.shields.io/badge/Auth-JWT-blue?style=flat)
 
 ---
 
@@ -107,10 +129,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4.  Push to the Branch (`git push origin feature/AmazingFeature`)
 5.  Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 

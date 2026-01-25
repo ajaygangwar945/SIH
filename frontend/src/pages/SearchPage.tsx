@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from 'react-query';
-import { 
-  Search, 
-  Filter, 
-  SortAsc, 
+import {
+  Search,
+  Filter,
+  SortAsc,
   SortDesc,
   Tag,
   ExternalLink,
@@ -70,16 +70,16 @@ const SearchPage: React.FC = () => {
 
   const sortedResults = React.useMemo(() => {
     if (!searchResults) return [];
-    
+
     return [...searchResults].sort((a, b) => {
       let comparison = 0;
-      
+
       if (sortBy === 'score') {
         comparison = a.score - b.score;
       } else {
         comparison = a.term.term.localeCompare(b.term.term);
       }
-      
+
       return sortOrder === 'asc' ? comparison : -comparison;
     });
   }, [searchResults, sortBy, sortOrder]);
@@ -87,14 +87,14 @@ const SearchPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-primary-100 rounded-lg">
-            <Search className="h-6 w-6 text-primary-600" />
+          <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+            <Search className="h-6 w-6 text-primary-600 dark:text-primary-400" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Search & Browse</h1>
-            <p className="text-gray-600">Find NAMASTE terminology with advanced search</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Search & Browse</h1>
+            <p className="text-gray-600 dark:text-gray-400">Find NAMASTE terminology with advanced search</p>
           </div>
         </div>
 
@@ -106,18 +106,18 @@ const SearchPage: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for terms, synonyms, or concepts..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-4 mt-4">
           <div className="flex items-center space-x-2">
-            <Filter className="h-4 w-4 text-gray-500" />
+            <Filter className="h-4 w-4 text-gray-500 dark:text-gray-400" />
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
             >
               <option value="">All Categories</option>
               {statsData?.map((category) => (
@@ -132,20 +132,20 @@ const SearchPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'score' | 'name')}
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
             >
               <option value="score">Sort by Score</option>
               <option value="name">Sort by Name</option>
             </select>
-            
+
             <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="p-1 hover:bg-gray-100 rounded-md"
+              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
             >
               {sortOrder === 'asc' ? (
-                <SortAsc className="h-4 w-4 text-gray-500" />
+                <SortAsc className="h-4 w-4 text-gray-500 dark:text-gray-400" />
               ) : (
-                <SortDesc className="h-4 w-4 text-gray-500" />
+                <SortDesc className="h-4 w-4 text-gray-500 dark:text-gray-400" />
               )}
             </button>
           </div>
@@ -153,7 +153,7 @@ const SearchPage: React.FC = () => {
       </div>
 
       {/* Results */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors">
         {isLoading && debouncedQuery && (
           <div className="p-8">
             <LoadingSpinner message="Searching..." />
@@ -170,11 +170,11 @@ const SearchPage: React.FC = () => {
         {!isLoading && !error && debouncedQuery && (
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Search Results ({sortedResults.length})
               </h2>
               {query && (
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   Results for "{query}"
                 </p>
               )}
@@ -189,35 +189,35 @@ const SearchPage: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ delay: index * 0.05 }}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                    className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 rounded-lg p-4 hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                             {result.term.term}
                           </h3>
-                          <span className="px-2 py-1 bg-primary-100 text-primary-800 text-xs font-medium rounded-full">
+                          <span className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-xs font-medium rounded-full">
                             {result.term.category}
                           </span>
-                          <div className="flex items-center space-x-1 text-sm text-gray-500">
+                          <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400">
                             <span>Score:</span>
                             <span className="font-medium">{result.score.toFixed(1)}</span>
                           </div>
                         </div>
 
                         {result.term.description && (
-                          <p className="text-gray-600 mb-3">{result.term.description}</p>
+                          <p className="text-gray-600 dark:text-gray-300 mb-3">{result.term.description}</p>
                         )}
 
                         {result.term.synonyms.length > 0 && (
                           <div className="flex flex-wrap items-center gap-2 mb-3">
                             <Tag className="h-4 w-4 text-gray-400" />
-                            <span className="text-sm text-gray-500">Synonyms:</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Synonyms:</span>
                             {result.term.synonyms.map((synonym, idx) => (
                               <span
                                 key={idx}
-                                className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md"
+                                className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-md"
                               >
                                 {synonym}
                               </span>
@@ -225,7 +225,7 @@ const SearchPage: React.FC = () => {
                           </div>
                         )}
 
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                           <span>ID: {result.term.id}</span>
                           {result.term.icd11_tm2_code && (
                             <span>ICD-11: {result.term.icd11_tm2_code}</span>
@@ -239,23 +239,23 @@ const SearchPage: React.FC = () => {
                       <div className="flex items-center space-x-2 ml-4">
                         <button
                           onClick={() => handleCopyId(result.term.id)}
-                          className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                           title="Copy ID"
                         >
                           {copiedId === result.term.id ? (
-                            <Check className="h-4 w-4 text-green-600" />
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
                           ) : (
-                            <Copy className="h-4 w-4 text-gray-500" />
+                            <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                           )}
                         </button>
-                        
+
                         {result.term.icd11_tm2_code && (
                           <button
                             onClick={() => window.open(`https://icd.who.int/browse11/l-m/en#/http://id.who.int/icd/entity/${result.term.icd11_tm2_code}`, '_blank')}
-                            className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                             title="View in ICD-11"
                           >
-                            <ExternalLink className="h-4 w-4 text-gray-500" />
+                            <ExternalLink className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                           </button>
                         )}
                       </div>
@@ -277,9 +277,9 @@ const SearchPage: React.FC = () => {
 
         {!debouncedQuery && (
           <div className="p-8 text-center">
-            <Search className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Start searching</h3>
-            <p className="text-gray-600">Enter a search term to find NAMASTE terminology</p>
+            <Search className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Start searching</h3>
+            <p className="text-gray-600 dark:text-gray-400">Enter a search term to find NAMASTE terminology</p>
           </div>
         )}
       </div>

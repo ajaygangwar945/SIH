@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Search, 
-  Languages, 
-  FileCode, 
+import {
+  Search,
+  Languages,
+  FileCode,
   Upload,
   Download,
-  Settings
+  Settings,
+  BarChart,
+  Users
 } from 'lucide-react';
 
 const QuickActions: React.FC = () => {
@@ -59,18 +61,34 @@ const QuickActions: React.FC = () => {
       href: '/admin',
       color: 'from-gray-500 to-gray-600',
       bgColor: 'bg-gray-50'
+    },
+    {
+      title: 'Analytics Dashboard',
+      description: 'View system insights and usage metrics',
+      icon: BarChart,
+      href: '/analytics',
+      color: 'from-pink-500 to-pink-600',
+      bgColor: 'bg-pink-50'
+    },
+    {
+      title: 'User Management',
+      description: 'Manage users and access controls',
+      icon: Users,
+      href: '/admin',
+      color: 'from-cyan-500 to-cyan-600',
+      bgColor: 'bg-cyan-50'
     }
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors h-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Quick Actions</h2>
-          <p className="text-gray-600">Common tasks and operations</p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Quick Actions</h2>
+          <p className="text-gray-600 dark:text-gray-400">Common tasks and operations</p>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {actions.map((action, index) => (
           <motion.div
@@ -81,17 +99,17 @@ const QuickActions: React.FC = () => {
           >
             <Link
               to={action.href}
-              className={`block ${action.bgColor} rounded-lg p-4 hover:shadow-md transition-all duration-200 group`}
+              className={`block ${action.bgColor} dark:bg-opacity-10 rounded-lg p-4 hover:shadow-md transition-all duration-200 group border border-transparent dark:border-gray-700 dark:hover:border-gray-600`}
             >
               <div className="flex items-start space-x-3">
                 <div className={`p-2 rounded-lg bg-gradient-to-r ${action.color}`}>
                   <action.icon className="h-5 w-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium text-gray-900 group-hover:text-gray-700">
+                  <h3 className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-gray-700 dark:group-hover:text-white">
                     {action.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                     {action.description}
                   </p>
                 </div>

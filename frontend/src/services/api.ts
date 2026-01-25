@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://ayush-fhir-backend.railway.app',
+  baseURL: process.env.REACT_APP_API_URL || '',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message || 'An error occurred';
-    
+
     if (error.response?.status === 401) {
       localStorage.removeItem('authToken');
       toast.error('Session expired. Please login again.');
@@ -41,7 +41,7 @@ api.interceptors.response.use(
     } else {
       toast.error(message);
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -50,31 +50,31 @@ api.interceptors.response.use(
 export const apiEndpoints = {
   // Health & System
   health: () => api.get('/health'),
-  
+
   // Terminology
-  searchTerms: (query: string, options?: { limit?: number; category?: string }) => 
+  searchTerms: (query: string, options?: { limit?: number; category?: string }) =>
     api.get('/api/terminology/search', { params: { q: query, ...options } }),
   getTermById: (id: string) => api.get(`/api/terminology/term/${id}`),
   getTermsByCategory: (category: string) => api.get(`/api/terminology/category/${category}`),
   getMappedTerms: () => api.get('/api/terminology/mapped'),
-  
+
   // Translation
   translateCode: (code: string, system: 'NAMASTE' | 'ICD-11-TM2') =>
     api.post('/api/translation', { code, system }),
-  
+
   // FHIR
   getCodeSystem: () => api.get('/api/fhir/CodeSystem/namaste'),
   getConceptMap: () => api.get('/api/fhir/ConceptMap/namaste-to-icd11'),
-  
+
   // ICD-11
   searchICD11: (query: string) => api.get('/api/icd/search', { params: { q: query } }),
-  
+
   // Admin
   ingestCSV: (csvData: string) => api.post('/admin/ingest-csv', { csvData }),
   loadSampleData: () => api.post('/admin/load-sample'),
   getStatistics: () => api.get('/admin/statistics'),
   clearData: () => api.delete('/admin/clear'),
-  
+
   // Auth
   getAuthToken: (abhaId: string) => api.post('/auth/token', { abhaId }),
 };

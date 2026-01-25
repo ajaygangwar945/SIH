@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation } from 'react-query';
-import { 
-  Languages, 
-  ArrowRight, 
+import {
+  Languages,
+  ArrowRight,
   Copy,
   Check,
   ExternalLink,
@@ -59,7 +59,7 @@ const TranslationPage: React.FC = () => {
       toast.error('Please enter a code to translate');
       return;
     }
-    
+
     translateMutation.mutate({
       code: sourceCode.trim(),
       system: sourceSystem
@@ -83,14 +83,14 @@ const TranslationPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-accent-100 rounded-lg">
-            <Languages className="h-6 w-6 text-accent-600" />
+          <div className="p-2 bg-accent-100 dark:bg-accent-900/30 rounded-lg">
+            <Languages className="h-6 w-6 text-accent-600 dark:text-accent-400" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Code Translation</h1>
-            <p className="text-gray-600">Convert between NAMASTE and ICD-11 TM2 codes</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Code Translation</h1>
+            <p className="text-gray-600 dark:text-gray-400">Convert between NAMASTE and ICD-11 TM2 codes</p>
           </div>
         </div>
 
@@ -99,13 +99,13 @@ const TranslationPage: React.FC = () => {
           {/* Source System Selection */}
           <div className="flex items-center justify-center space-x-4">
             <div className="flex-1 max-w-md">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Source System
               </label>
               <select
                 value={sourceSystem}
                 onChange={(e) => setSourceSystem(e.target.value as 'NAMASTE' | 'ICD-11-TM2')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="NAMASTE">NAMASTE (Traditional Medicine)</option>
                 <option value="ICD-11-TM2">ICD-11 TM2 (International)</option>
@@ -114,17 +114,17 @@ const TranslationPage: React.FC = () => {
 
             <button
               onClick={swapSystems}
-              className="p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors mt-6"
+              className="p-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition-colors mt-6"
               title="Swap systems"
             >
-              <RefreshCw className="h-5 w-5 text-gray-600" />
+              <RefreshCw className="h-5 w-5 text-gray-600 dark:text-gray-300" />
             </button>
 
             <div className="flex-1 max-w-md">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Target System
               </label>
-              <div className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600">
+              <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-400">
                 {sourceSystem === 'NAMASTE' ? 'ICD-11 TM2 (International)' : 'NAMASTE (Traditional Medicine)'}
               </div>
             </div>
@@ -133,7 +133,7 @@ const TranslationPage: React.FC = () => {
           {/* Source Code Input */}
           <div className="flex items-center justify-center space-x-4">
             <div className="flex-1 max-w-md">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Source Code
               </label>
               <input
@@ -141,7 +141,7 @@ const TranslationPage: React.FC = () => {
                 value={sourceCode}
                 onChange={(e) => setSourceCode(e.target.value)}
                 placeholder={sourceSystem === 'NAMASTE' ? 'e.g., AY001' : 'e.g., TM2-AY134'}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
               />
             </div>
 
@@ -170,22 +170,22 @@ const TranslationPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
           >
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <Check className="h-6 w-6 text-green-600" />
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">Translation Results</h2>
-                <p className="text-gray-600">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Translation Results</h2>
+                <p className="text-gray-600 dark:text-gray-400">
                   {translateMutation.data.data.total} translation(s) found
                 </p>
               </div>
             </div>
 
             {/* Source Info */}
-            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+            <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
               <div className="flex items-center space-x-3">
                 <div className={`p-2 rounded-lg bg-gradient-to-r ${getSystemColor(sourceSystem)}`}>
                   <span className="text-white font-medium text-sm">
@@ -193,8 +193,8 @@ const TranslationPage: React.FC = () => {
                   </span>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">{sourceCode}</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="font-medium text-gray-900 dark:text-gray-100">{sourceCode}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     {getSystemDisplayName(sourceSystem)}
                   </p>
                 </div>
@@ -210,46 +210,45 @@ const TranslationPage: React.FC = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+                    className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow dark:hover:bg-gray-700/30"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
                         <ArrowRight className="h-5 w-5 text-gray-400" />
-                        
-                        <div className={`p-2 rounded-lg bg-gradient-to-r ${
-                          translation.system === 'NAMASTE' ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600'
-                        }`}>
+
+                        <div className={`p-2 rounded-lg bg-gradient-to-r ${translation.system === 'NAMASTE' ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600'
+                          }`}>
                           <span className="text-white font-medium text-sm">
                             {translation.system}
                           </span>
                         </div>
-                        
+
                         <div>
-                          <p className="font-medium text-gray-900">{translation.code}</p>
-                          <p className="text-sm text-gray-600">{translation.display}</p>
+                          <p className="font-medium text-gray-900 dark:text-gray-100">{translation.code}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{translation.display}</p>
                         </div>
                       </div>
 
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => handleCopy(translation.code)}
-                          className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                           title="Copy code"
                         >
                           {copiedText === translation.code ? (
-                            <Check className="h-4 w-4 text-green-600" />
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
                           ) : (
-                            <Copy className="h-4 w-4 text-gray-500" />
+                            <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                           )}
                         </button>
 
                         {translation.system === 'ICD-11-TM2' && (
                           <button
                             onClick={() => window.open(`https://icd.who.int/browse11/l-m/en#/http://id.who.int/icd/entity/${translation.code}`, '_blank')}
-                            className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                             title="View in ICD-11"
                           >
-                            <ExternalLink className="h-4 w-4 text-gray-500" />
+                            <ExternalLink className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                           </button>
                         )}
                       </div>
@@ -260,16 +259,16 @@ const TranslationPage: React.FC = () => {
             ) : (
               <div className="text-center py-8">
                 <AlertCircle className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No translations found</h3>
-                <p className="text-gray-600">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No translations found</h3>
+                <p className="text-gray-600 dark:text-gray-400">
                   The code "{sourceCode}" doesn't have any mappings in the {sourceSystem} system.
                 </p>
               </div>
             )}
 
             {/* Translation Info */}
-            <div className="mt-6 pt-4 border-t border-gray-200">
-              <div className="flex items-center justify-between text-sm text-gray-500">
+            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                 <span>
                   Translation completed at {new Date(translateMutation.data.data.timestamp).toLocaleString()}
                 </span>
@@ -285,9 +284,9 @@ const TranslationPage: React.FC = () => {
       </AnimatePresence>
 
       {/* Help Section */}
-      <div className="bg-blue-50 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-blue-900 mb-3">How to use Code Translation</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
+      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 transition-colors">
+        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">How to use Code Translation</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800 dark:text-blue-200">
           <div>
             <h4 className="font-medium mb-2">NAMASTE Codes:</h4>
             <ul className="space-y-1">

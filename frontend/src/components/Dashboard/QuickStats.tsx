@@ -46,7 +46,7 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
     },
     {
       title: 'Cache Hit Rate',
-      value: data?.cacheStats ? 
+      value: data?.cacheStats ?
         Math.round((data.cacheStats.hits / (data.cacheStats.hits + data.cacheStats.misses)) * 100) : 0,
       icon: TrendingUp,
       color: 'text-orange-600',
@@ -65,25 +65,24 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{stat.title}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {stat.value.toLocaleString()}{stat.suffix || ''}
               </p>
               <div className="flex items-center mt-1">
-                <span className={`text-xs font-medium ${
-                  stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-                }`}>
+                <span className={`text-xs font-medium ${stat.changeType === 'positive' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                  }`}>
                   {stat.change}
                 </span>
-                <span className="text-xs text-gray-500 ml-1">vs last week</span>
+                <span className="text-xs text-gray-500 dark:text-gray-500 ml-1">vs last week</span>
               </div>
             </div>
-            <div className={`p-3 rounded-lg ${stat.bgColor}`}>
-              <stat.icon className={`h-6 w-6 ${stat.color}`} />
+            <div className={`p-3 rounded-lg ${stat.bgColor} dark:bg-opacity-20`}>
+              <stat.icon className={`h-6 w-6 ${stat.color} dark:text-opacity-90`} />
             </div>
           </div>
         </motion.div>

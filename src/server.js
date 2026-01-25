@@ -26,13 +26,13 @@ class AyushFHIRServer {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    
+
     // Initialize services
     this.csvParser = new CSVParser();
     this.dataStore = new DataStore();
     this.fhirService = new FHIRService(this.dataStore);
     this.icdService = new ICDService(this.dataStore);
-    
+
     this.setupMiddleware();
     this.setupRoutes();
     this.setupErrorHandling();
@@ -59,8 +59,8 @@ class AyushFHIRServer {
 
     // CORS configuration
     this.app.use(cors({
-      origin: process.env.NODE_ENV === 'production' 
-        ? ['https://your-domain.com'] 
+      origin: process.env.NODE_ENV === 'production'
+        ? ['https://your-domain.com']
         : ['http://localhost:3000', 'http://localhost:3001'],
       credentials: true
     }));
@@ -177,7 +177,7 @@ class AyushFHIRServer {
     router.get('/search', (req, res) => {
       try {
         const { q, limit = 10, category, minScore = 0.1 } = req.query;
-        
+
         if (!q) {
           return res.status(400).json({
             error: 'Query parameter "q" is required'
@@ -209,7 +209,7 @@ class AyushFHIRServer {
       try {
         const { id } = req.params;
         const term = this.dataStore.getTermById(id);
-        
+
         if (!term) {
           return res.status(404).json({
             error: 'Term not found',
@@ -234,7 +234,7 @@ class AyushFHIRServer {
       try {
         const { category } = req.params;
         const terms = this.dataStore.getTermsByCategory(category);
-        
+
         res.json({
           category: category,
           terms: terms,
@@ -253,7 +253,7 @@ class AyushFHIRServer {
     router.get('/mapped', (req, res) => {
       try {
         const terms = this.dataStore.getTermsWithICD11Mappings();
-        
+
         res.json({
           terms: terms,
           total: terms.length,
@@ -275,20 +275,31 @@ class AyushFHIRServer {
    */
   setupErrorHandling() {
 
-    // 404 handler
-    this.app.use('*', (req, res) => {
-      res.status(404).json({
-        error: 'Endpoint not found',
-        path: req.originalUrl,
-        method: req.method,
-        timestamp: new Date().toISOString()
+    // Serve React Frontend in Production
+    if (process.env.NODE_ENV === 'production') {
+      const frontendBuildPath = path.join(__dirname, '../frontend/build');
+      this.app.use(express.static(frontendBuildPath));
+
+      // Handle React routing, return all requests to React app
+      this.app.get('*', (req, res) => {
+        res.sendFile(path.join(frontendBuildPath, 'index.html'));
       });
-    });
+    } else {
+      // 404 handler for development API
+      this.app.use('*', (req, res) => {
+        res.status(404).json({
+          error: 'Endpoint not found',
+          path: req.originalUrl,
+          method: req.method,
+          timestamp: new Date().toISOString()
+        });
+      });
+    }
 
     // Global error handler
     this.app.use((error, req, res, next) => {
       console.error('Global error handler:', error);
-      
+
       res.status(error.status || 500).json({
         error: 'Internal server error',
         message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong',
@@ -298,17 +309,28 @@ class AyushFHIRServer {
   }
 
   /**
+   * Load initial data
+   */
+  async loadData() {
+    try {
+      console.log('Loading sample NAMASTE data...');
+      const sampleCSVPath = path.join(__dirname, '../data/sample-namaste.csv');
+      const parseResult = await this.csvParser.parseCSV(sampleCSVPath);
+      const storeResult = this.dataStore.storeTerms(parseResult.terms);
+      console.log(`Loaded ${storeResult.stored} terms from sample data`);
+    } catch (error) {
+      console.error('Failed to load data:', error);
+      // Don't exit process in serverless environment, just log
+    }
+  }
+
+  /**
    * Start the server
    */
   async start() {
     try {
       // Load sample data on startup
-      console.log('Loading sample NAMASTE data...');
-      const sampleCSVPath = path.join(__dirname, '../data/sample-namaste.csv');
-      const parseResult = await this.csvParser.parseCSV(sampleCSVPath);
-      const storeResult = this.dataStore.storeTerms(parseResult.terms);
-      
-      console.log(`Loaded ${storeResult.stored} terms from sample data`);
+      await this.loadData();
 
       // Start server
       this.app.listen(this.port, () => {

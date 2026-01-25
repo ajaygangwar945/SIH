@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { 
-  Settings, 
-  Upload, 
-  Database, 
-  Trash2, 
+import {
+  Settings,
+  Upload,
+  Database,
+  Trash2,
   RefreshCw,
   FileText,
   AlertTriangle,
@@ -125,14 +125,14 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-gray-100 rounded-lg">
-            <Settings className="h-6 w-6 text-gray-600" />
+          <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+            <Settings className="h-6 w-6 text-gray-600 dark:text-gray-300" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
-            <p className="text-gray-600">Manage data and system settings</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Admin Panel</h1>
+            <p className="text-gray-600 dark:text-gray-400">Manage data and system settings</p>
           </div>
         </div>
       </div>
@@ -140,14 +140,14 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Statistics */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-blue-600" />
+              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                <BarChart3 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">System Statistics</h2>
-                <p className="text-gray-600">Current data store metrics</p>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">System Statistics</h2>
+                <p className="text-gray-600 dark:text-gray-400">Current data store metrics</p>
               </div>
             </div>
 
@@ -158,51 +158,51 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Total Terms</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Terms</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {statsData?.statistics?.totalTerms || 0}
                       </p>
                     </div>
-                    <Database className="h-8 w-8 text-gray-400" />
+                    <Database className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Categories</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Categories</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {statsData?.statistics?.categoryCount || 0}
                       </p>
                     </div>
-                    <FileText className="h-8 w-8 text-gray-400" />
+                    <FileText className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Index Size</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Index Size</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {statsData?.statistics?.indexSize || 0}
                       </p>
                     </div>
-                    <RefreshCw className="h-8 w-8 text-gray-400" />
+                    <RefreshCw className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Cache Keys</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Cache Keys</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {statsData?.statistics?.cacheStats?.keys || 0}
                       </p>
                     </div>
-                    <Database className="h-8 w-8 text-gray-400" />
+                    <Database className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                   </div>
                 </div>
               </div>
@@ -213,9 +213,9 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
         {/* Quick Actions */}
         <div className="space-y-6">
           {/* Load Sample Data */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-            
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Quick Actions</h3>
+
             <div className="space-y-4">
               <button
                 onClick={() => loadSampleMutation.mutate()}
@@ -264,31 +264,31 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
           </div>
 
           {/* System Status */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">System Status</h3>
-            
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">System Status</h3>
+
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Backend API</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">Backend API</span>
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <span className="text-sm text-green-600">Online</span>
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <span className="text-sm text-green-600 dark:text-green-400">Online</span>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Database</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">Database</span>
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <span className="text-sm text-green-600">Connected</span>
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <span className="text-sm text-green-600 dark:text-green-400">Connected</span>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">ICD-11 API</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">ICD-11 API</span>
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <span className="text-sm text-green-600">Available</span>
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <span className="text-sm text-green-600 dark:text-green-400">Available</span>
                 </div>
               </div>
             </div>
@@ -297,21 +297,21 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
       </div>
 
       {/* CSV Upload */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-6">
-          <div className="p-2 bg-green-100 rounded-lg">
-            <Upload className="h-6 w-6 text-green-600" />
+          <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+            <Upload className="h-6 w-6 text-green-600 dark:text-green-400" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Upload CSV Data</h2>
-            <p className="text-gray-600">Ingest NAMASTE terminology from CSV files</p>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Upload CSV Data</h2>
+            <p className="text-gray-600 dark:text-gray-400">Ingest NAMASTE terminology from CSV files</p>
           </div>
         </div>
 
         <div className="space-y-6">
           {/* File Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Select CSV File
             </label>
             <input
@@ -319,14 +319,14 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
               type="file"
               accept=".csv"
               onChange={handleFileUpload}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-900/30 dark:file:text-primary-400"
             />
           </div>
 
           {/* CSV Content Preview */}
           {csvContent && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 CSV Content Preview
               </label>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto max-h-40">
@@ -345,28 +345,26 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className={`p-4 rounded-lg ${
-                  uploadStatus === 'success' ? 'bg-green-50 border border-green-200' :
-                  uploadStatus === 'error' ? 'bg-red-50 border border-red-200' :
-                  'bg-blue-50 border border-blue-200'
-                }`}
+                className={`p-4 rounded-lg ${uploadStatus === 'success' ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' :
+                    uploadStatus === 'error' ? 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' :
+                      'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                  }`}
               >
                 <div className="flex items-center space-x-2">
                   {uploadStatus === 'success' ? (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                   ) : uploadStatus === 'error' ? (
-                    <AlertTriangle className="h-5 w-5 text-red-600" />
+                    <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />
                   ) : (
                     <div className="spinner"></div>
                   )}
-                  <span className={`font-medium ${
-                    uploadStatus === 'success' ? 'text-green-800' :
-                    uploadStatus === 'error' ? 'text-red-800' :
-                    'text-blue-800'
-                  }`}>
+                  <span className={`font-medium ${uploadStatus === 'success' ? 'text-green-800 dark:text-green-300' :
+                      uploadStatus === 'error' ? 'text-red-800 dark:text-red-300' :
+                        'text-blue-800 dark:text-blue-300'
+                    }`}>
                     {uploadStatus === 'success' ? 'Upload successful!' :
-                     uploadStatus === 'error' ? 'Upload failed!' :
-                     'Uploading...'}
+                      uploadStatus === 'error' ? 'Upload failed!' :
+                        'Uploading...'}
                   </span>
                 </div>
               </motion.div>

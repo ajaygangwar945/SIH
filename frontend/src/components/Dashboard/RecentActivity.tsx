@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Search, 
-  Upload, 
-  Download, 
+import {
+  Search,
+  Upload,
+  Download,
   Code,
   Clock,
   TrendingUp
@@ -54,15 +54,15 @@ const RecentActivity: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors h-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Recent Activity</h2>
-          <p className="text-gray-600">Latest system interactions</p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
+          <p className="text-gray-600 dark:text-gray-400">Latest system interactions</p>
         </div>
         <TrendingUp className="h-5 w-5 text-gray-400" />
       </div>
-      
+
       <div className="space-y-4">
         {activities.map((activity, index) => (
           <motion.div
@@ -70,24 +70,24 @@ const RecentActivity: React.FC = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
-            <div className={`p-2 rounded-lg ${activity.bgColor}`}>
-              <activity.icon className={`h-4 w-4 ${activity.color}`} />
+            <div className={`p-2 rounded-lg ${activity.bgColor} dark:bg-opacity-20`}>
+              <activity.icon className={`h-4 w-4 ${activity.color} dark:text-opacity-90`} />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-900">{activity.action}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-200">{activity.action}</p>
               <div className="flex items-center space-x-1 mt-1">
                 <Clock className="h-3 w-3 text-gray-400" />
-                <p className="text-xs text-gray-500">{activity.time}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{activity.time}</p>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
-      
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <button className="w-full text-center text-sm text-primary-600 hover:text-primary-700 font-medium">
+
+      <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+        <button className="w-full text-center text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
           View all activity
         </button>
       </div>

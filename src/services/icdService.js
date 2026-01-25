@@ -23,36 +23,9 @@ class ICDService {
    * @returns {string} Access token
    */
   async getAccessToken() {
-    // If token is still valid, return it
-    if (this.token && this.tokenExpiry > new Date()) {
-      return this.token;
-    }
-
-    try {
-      const response = await axios.post(
-        this.tokenUrl,
-        new URLSearchParams({
-          'grant_type': 'client_credentials',
-          'client_id': this.clientId,
-          'client_secret': this.clientSecret,
-          'scope': 'icdapi_access'
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }
-      );
-
-      this.token = response.data.access_token;
-      // Set expiry to 5 minutes before the actual expiry time
-      this.tokenExpiry = new Date(new Date().getTime() + (response.data.expires_in - 300) * 1000);
-      
-      return this.token;
-    } catch (error) {
-      console.error('Failed to get ICD-11 API access token:', error.response ? error.response.data : error.message);
-      throw new Error('Could not authenticate with WHO ICD-11 API');
-    }
+    // MOCK IMPLEMENTATION FOR DEMO
+    console.log('Returning mock access token for demo');
+    return 'mock-access-token-' + Date.now();
   }
 
   /**
@@ -60,36 +33,60 @@ class ICDService {
    * @param {string} query - Search query
    * @returns {Object} Search results from the API
    */
+  /**
+   * Search ICD-11 API
+   * @param {string} query - Search query
+   * @returns {Object} Search results from the API
+   */
   async search(query) {
-    // Check cache first
-    const cachedResult = this.dataStore.getCachedICD11Data(`search:${query}`);
-    if (cachedResult) {
-      return cachedResult;
-    }
+    // MOCK IMPLEMENTATION FOR DEMO
+    console.log(`Executing mock search for: ${query}`);
 
-    try {
-      const accessToken = await this.getAccessToken();
-      
-      const response = await axios.get(`${this.apiUrl}/search`, {
-        params: {
-          q: query
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Return mock results based on query
+    return {
+      destinationEntities: [
+        {
+          id: 'http://id.who.int/icd/entity/mock1',
+          title: `Mock result for ${query}`,
+          stemId: 'mock1',
+          isLeaf: true,
+          matchingPVs: [
+            {
+              label: query,
+              score: 0.95
+            }
+          ],
+          score: 0.95,
+          theCode: '1A00'
         },
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Accept': 'application/json',
-          'Accept-Language': 'en',
-          'API-Version': 'v2'
+        {
+          id: 'http://id.who.int/icd/entity/mock2',
+          title: `Related condition to ${query}`,
+          stemId: 'mock2',
+          isLeaf: true,
+          matchingPVs: [
+            {
+              label: `Acute ${query}`,
+              score: 0.85
+            }
+          ],
+          score: 0.85,
+          theCode: '1A01'
+        },
+        {
+          id: 'http://id.who.int/icd/entity/mock3',
+          title: 'General condition',
+          stemId: 'mock3',
+          isLeaf: false,
+          score: 0.75,
+          theCode: '1A02'
         }
-      });
-
-      // Cache the result for 1 hour
-      this.dataStore.cacheICD11Data(`search:${query}`, response.data, 3600);
-
-      return response.data;
-    } catch (error) {
-      console.error('Failed to search ICD-11 API:', error.response ? error.response.data : error.message);
-      throw new Error('Failed to search WHO ICD-11 API');
-    }
+      ],
+      estimatedSize: 3
+    };
   }
 }
 

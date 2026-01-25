@@ -314,7 +314,10 @@ class AyushFHIRServer {
   async loadData() {
     try {
       console.log('Loading sample NAMASTE data...');
-      const sampleCSVPath = path.join(__dirname, '../data/sample-namaste.csv');
+      // Try resolving relative to CWD (safer for Vercel)
+      const sampleCSVPath = path.join(process.cwd(), 'data/sample-namaste.csv');
+      console.log(`Reading data from: ${sampleCSVPath}`);
+
       const parseResult = await this.csvParser.parseCSV(sampleCSVPath);
       const storeResult = this.dataStore.storeTerms(parseResult.terms);
       console.log(`Loaded ${storeResult.stored} terms from sample data`);

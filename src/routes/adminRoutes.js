@@ -4,7 +4,7 @@
  */
 
 const express = require('express');
-const path = require('path');
+const { getDataPath } = require('../utils/paths');
 const auditService = require('../services/auditService');
 
 module.exports = (dataStore, csvParser) => {
@@ -14,9 +14,9 @@ module.exports = (dataStore, csvParser) => {
   router.post('/ingest-csv', async (req, res) => {
     try {
       const { csvData, filePath } = req.body;
-      
+
       let parseResult;
-      
+
       if (csvData) {
         // Parse from string data
         parseResult = await csvParser.parseCSVFromString(csvData);
@@ -48,7 +48,7 @@ module.exports = (dataStore, csvParser) => {
         );
         console.log('Provenance:', JSON.stringify(provenance, null, 2));
       });
-      
+
       res.json({
         success: parseResult.success,
         parsing: parseResult.summary,
@@ -67,10 +67,12 @@ module.exports = (dataStore, csvParser) => {
   // Load sample data
   router.post('/load-sample', async (req, res) => {
     try {
-      const sampleCSVPath = path.join(__dirname, '../../data/sample-namaste.csv');
+      // Use helper to resolve path correctly in Vercel or Local
+      const sampleCSVPath = getDataPath('sample-namaste.csv');
+
       const parseResult = await csvParser.parseCSV(sampleCSVPath);
       const storeResult = dataStore.storeTerms(parseResult.terms);
-      
+
       res.json({
         message: 'Sample data loaded successfully',
         parsing: parseResult.summary,

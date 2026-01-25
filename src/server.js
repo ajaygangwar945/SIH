@@ -8,6 +8,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+const { getDataPath } = require('./utils/paths');
 
 // Import services
 const CSVParser = require('./services/csvParser');
@@ -315,7 +316,7 @@ class AyushFHIRServer {
     try {
       console.log('Loading sample NAMASTE data...');
       // Try resolving relative to CWD (safer for Vercel)
-      const sampleCSVPath = path.join(process.cwd(), 'data/sample-namaste.csv');
+      const sampleCSVPath = getDataPath('sample-namaste.csv');
       console.log(`Reading data from: ${sampleCSVPath}`);
 
       const parseResult = await this.csvParser.parseCSV(sampleCSVPath);

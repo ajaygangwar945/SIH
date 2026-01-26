@@ -7,7 +7,8 @@ const fs = require('fs');
  */
 const getDataPath = (filename) => {
     const potentialPaths = [
-        // Vercel / Serverless environments
+        // Vercel / Serverless environments (File moved to api/data for creating bundle)
+        path.join(process.cwd(), 'api', 'data', filename),
         path.join(process.cwd(), 'data', filename),
         path.join(process.cwd(), filename),
         // Local development (src/utils/../../data)

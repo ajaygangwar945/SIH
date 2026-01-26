@@ -6,24 +6,33 @@ const fs = require('fs');
  * Handles local development and Vercel serverless environment
  */
 const getDataPath = (filename) => {
-    // Option 1: Try resolving relative to CWD (Vercel standard)
-    const cwdPath = path.join(process.cwd(), 'data', filename);
-    if (fs.existsSync(cwdPath)) {
-        console.log(`Found data at CWD path: ${cwdPath}`);
-        return cwdPath;
+    const potentialPaths = [
+        // Vercel / Serverless environments
+        path.join(process.cwd(), 'data', filename),
+        path.join(process.cwd(), filename),
+        // Local development (src/utils/../../data)
+        path.join(__dirname, '../../data', filename),
+        // Fallbacks
+        path.join(__dirname, '../data', filename),
+        path.join(__dirname, 'data', filename)
+    ];
+
+    console.log(`[PathUtils] Looking for ${filename} in potential locations...`);
+    console.log(`[PathUtils] CWD: ${process.cwd()}`);
+    console.log(`[PathUtils] __dirname: ${__dirname}`);
+
+    for (const p of potentialPaths) {
+        if (fs.existsSync(p)) {
+            console.log(`[PathUtils] Found data at: ${p}`);
+            return p;
+        }
     }
 
-    // Option 2: Try resolving relative to __dirname (Local standard)
-    // Assuming this file is in src/utils/
-    const localPath = path.join(__dirname, '../../data', filename);
-    if (fs.existsSync(localPath)) {
-        console.log(`Found data at Local path: ${localPath}`);
-        return localPath;
-    }
-
-    // Fallback: Return CWD path and hope for the best (or let the caller fail)
-    console.log(`Data file not found, defaulting to: ${cwdPath}`);
-    return cwdPath;
+    // Default to CWD if not found (will likely fail, but provides a path for error message)
+    const defaultPath = path.join(process.cwd(), 'data', filename);
+    console.log(`[PathUtils] File not found in any location. Defaulting to: ${defaultPath}`);
+    return defaultPath;
 };
+
 
 module.exports = { getDataPath };

@@ -69,6 +69,30 @@ module.exports = (dataStore, csvParser) => {
     try {
       // Use helper to resolve path correctly in Vercel or Local
       const sampleCSVPath = getDataPath('sample-namaste.csv');
+      const fs = require('fs');
+      const path = require('path');
+
+      // DEBUG: Explicit check for file existence
+      if (!fs.existsSync(sampleCSVPath)) {
+        console.log(`[DEBUG] File missing at resolved path: ${sampleCSVPath}`);
+
+        // List files in CWD and data directory for debugging
+        const cwd = process.cwd();
+        const filesInCwd = fs.readdirSync(cwd);
+
+        let filesInData = 'Data dir not found';
+        const dataDir = path.join(cwd, 'data');
+        if (fs.existsSync(dataDir)) {
+          filesInData = fs.readdirSync(dataDir).join(', ');
+        }
+
+        throw new Error(
+          `DEBUG INFO: File not found at ${sampleCSVPath}. ` +
+          `CWD: ${cwd}. ` +
+          `Files in CWD: [${filesInCwd.join(', ')}]. ` +
+          `Files in data: [${filesInData}]`
+        );
+      }
 
       const parseResult = await csvParser.parseCSV(sampleCSVPath);
       const storeResult = dataStore.storeTerms(parseResult.terms);
@@ -80,12 +104,15 @@ module.exports = (dataStore, csvParser) => {
         timestamp: new Date().toISOString()
       });
     } catch (error) {
+      console.error('Load Sample Error:', error);
       res.status(500).json({
         error: 'Failed to load sample data',
-        message: error.message
+        message: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
       });
     }
   });
+
 
   // Get statistics
   router.get('/statistics', (req, res) => {

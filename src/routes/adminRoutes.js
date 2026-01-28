@@ -80,6 +80,7 @@ module.exports = (dataStore, csvParser) => {
         const cwd = process.cwd();
         const filesInCwd = fs.readdirSync(cwd);
 
+        let filesInData = 'Data dir not found';
         const dataDir = path.join(cwd, 'data');
         if (fs.existsSync(dataDir)) {
           filesInData = fs.readdirSync(dataDir).join(', ');

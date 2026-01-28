@@ -33,7 +33,7 @@ api.interceptors.response.use(
   (error) => {
     const message = error.response?.data?.message || error.message || 'An error occurred';
 
-    const message = error.response?.data?.message || error.message || 'An error occurred';
+
 
     if (error.response?.status === 401) {
       localStorage.removeItem('authToken');

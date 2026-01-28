@@ -80,17 +80,23 @@ module.exports = (dataStore, csvParser) => {
         const cwd = process.cwd();
         const filesInCwd = fs.readdirSync(cwd);
 
-        let filesInData = 'Data dir not found';
         const dataDir = path.join(cwd, 'data');
         if (fs.existsSync(dataDir)) {
           filesInData = fs.readdirSync(dataDir).join(', ');
+        }
+
+        let filesInApiData = 'api/data dir not found';
+        const apiDataDir = path.join(cwd, 'api', 'data');
+        if (fs.existsSync(apiDataDir)) {
+          filesInApiData = fs.readdirSync(apiDataDir).join(', ');
         }
 
         throw new Error(
           `DEBUG INFO: File not found at ${sampleCSVPath}. ` +
           `CWD: ${cwd}. ` +
           `Files in CWD: [${filesInCwd.join(', ')}]. ` +
-          `Files in data: [${filesInData}]`
+          `Files in data: [${filesInData}]. ` +
+          `Files in api/data: [${filesInApiData}]`
         );
       }
 
@@ -144,6 +150,40 @@ module.exports = (dataStore, csvParser) => {
         message: error.message
       });
     }
+  });
+
+  // Debug: List all files
+  router.get('/debug-files', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+
+    function listFiles(dir, depth = 0) {
+      if (depth > 3) return ['...depth limit...'];
+      let results = [];
+      try {
+        const list = fs.readdirSync(dir);
+        list.forEach(file => {
+          const filePath = path.join(dir, file);
+          const stat = fs.statSync(filePath);
+          if (stat && stat.isDirectory()) {
+            if (file !== 'node_modules' && file !== '.git') {
+              results = results.concat(listFiles(filePath, depth + 1));
+            }
+          } else {
+            results.push(filePath);
+          }
+        });
+      } catch (e) {
+        results.push(`Error reading ${dir}: ${e.message}`);
+      }
+      return results;
+    }
+
+    const allFiles = listFiles(process.cwd());
+    res.json({
+      cwd: process.cwd(),
+      files: allFiles
+    });
   });
 
   return router;

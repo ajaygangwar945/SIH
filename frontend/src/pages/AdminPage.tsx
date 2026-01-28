@@ -55,8 +55,10 @@ const AdminPage: React.FC = () => {
         queryClient.invalidateQueries('statistics');
         queryClient.invalidateQueries('search');
       },
-      onError: () => {
-        toast.error('Failed to load sample data');
+      onError: (error: any) => {
+        const errorMessage = error.response?.data?.message || error.message || 'Failed to load sample data';
+        toast.error(`Error: ${errorMessage}`);
+        console.error('Load sample error:', error);
       }
     }
   );
@@ -346,8 +348,8 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 className={`p-4 rounded-lg ${uploadStatus === 'success' ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' :
-                    uploadStatus === 'error' ? 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' :
-                      'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                  uploadStatus === 'error' ? 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' :
+                    'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
                   }`}
               >
                 <div className="flex items-center space-x-2">
@@ -359,8 +361,8 @@ UN001,"Mizaj-e-Har","Unani Temperament","Hot temperament,Warm constitution","TM2
                     <div className="spinner"></div>
                   )}
                   <span className={`font-medium ${uploadStatus === 'success' ? 'text-green-800 dark:text-green-300' :
-                      uploadStatus === 'error' ? 'text-red-800 dark:text-red-300' :
-                        'text-blue-800 dark:text-blue-300'
+                    uploadStatus === 'error' ? 'text-red-800 dark:text-red-300' :
+                      'text-blue-800 dark:text-blue-300'
                     }`}>
                     {uploadStatus === 'success' ? 'Upload successful!' :
                       uploadStatus === 'error' ? 'Upload failed!' :

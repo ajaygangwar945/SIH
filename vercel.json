@@ -36,6 +36,10 @@
             "destination": "/api/index.js"
         },
         {
+            "source": "/((?!api/|auth/|admin/|health|static/|.*\\..*).*)",
+            "destination": "/frontend/index.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/frontend/$1"
         }

@@ -7,20 +7,20 @@ const fs = require('fs');
  */
 const getDataPath = (filename) => {
     const potentialPaths = [
-        // Vercel / Serverless environments (File moved to api/data for creating bundle)
+        // Vercel / Serverless environments (Prioritize api/data)
         path.join(process.cwd(), 'api', 'data', filename),
+        // Fallback for when process.cwd() is the root (local dev)
         path.join(process.cwd(), 'data', filename),
+        // Direct path
         path.join(process.cwd(), filename),
-        // Local development (src/utils/../../data)
+        // Local development relative to this file (src/utils/../../data)
         path.join(__dirname, '../../data', filename),
         // Fallbacks
-        path.join(__dirname, '../data', filename),
-        path.join(__dirname, 'data', filename)
+        path.join(__dirname, '../data', filename)
     ];
 
-    console.log(`[PathUtils] Looking for ${filename} in potential locations...`);
+    console.log(`[PathUtils] Looking for ${filename}`);
     console.log(`[PathUtils] CWD: ${process.cwd()}`);
-    console.log(`[PathUtils] __dirname: ${__dirname}`);
 
     for (const p of potentialPaths) {
         if (fs.existsSync(p)) {
@@ -29,8 +29,9 @@ const getDataPath = (filename) => {
         }
     }
 
-    // Default to CWD if not found (will likely fail, but provides a path for error message)
-    const defaultPath = path.join(process.cwd(), 'data', filename);
+    // Return the Vercel expected path as default even if it doesn't exist logically, 
+    // to give a clear error message or in case of read-only fs issues
+    const defaultPath = path.join(process.cwd(), 'api', 'data', filename);
     console.log(`[PathUtils] File not found in any location. Defaulting to: ${defaultPath}`);
     return defaultPath;
 };

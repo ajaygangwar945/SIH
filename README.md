@@ -1,3 +1,5 @@
+<img src="/frontend/public/Gemini_Generated_Image_k6g886k6g886k6g8.png" height="200" width="100%" align="center">
+
 <div align="center">
 
 # 🏥 Ayush FHIR Integration Platform  
@@ -6,7 +8,6 @@
 
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=flat)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 ![FHIR](https://img.shields.io/badge/HL7-FHIR_R4-orange?style=flat)
 ![Healthcare](https://img.shields.io/badge/Domain-Healthcare-blueviolet?style=flat)
 
@@ -66,17 +67,25 @@ This enables better continuity of care, data sharing, and integration with natio
 
 ```
 📦 SIH
- ┣ 📂 frontend          # React-based user interface
- ┃ ┣ 📂 src             # Source code for frontend
+ ┣ 📂 api               # Vercel Serverless Functions
+ ┃ ┣ 📂 data            # Deployment data bundle
+ ┃ ┗ 📜 index.js        # Serverless entry point
+ ┣ 📂 frontend          # React Frontend
  ┃ ┣ 📂 public          # Static assets
- ┃ ┗ 📜 package.json    # Frontend dependencies
- ┣ 📂 src               # Backend source code
- ┃ ┣ 📂 routes          # API routes
- ┃ ┣ 📂 models          # Database models
- ┃ ┣ 📂 services        # Business logic & services
- ┃ ┗ 📜 server.js       # Entry point
- ┣ 📂 data              # Data storage/samples
- ┗ 📜 README.md         # Project documentation
+ ┃ ┣ 📂 src             # Source code
+ ┃ ┃ ┣ 📂 components    # UI Components
+ ┃ ┃ ┣ 📂 pages         # Route Pages
+ ┃ ┃ ┣ 📂 services      # API Services
+ ┃ ┃ ┗ � context       # React Context
+ ┃ ┗ 📜 package.json
+ ┣ 📂 src               # Node.js Backend
+ ┃ ┣ 📂 models          # Mongoose Models
+ ┃ ┣ 📂 routes          # Express Routes
+ ┃ ┣ 📂 services        # Business Logic
+ ┃ ┗ 📜 server.js       # Backend Entry Point
+ ┣ 📂 data              # Sample Data
+ ┣ 📜 vercel.json       # Vercel Configuration
+ ┗ 📜 README.md         # Documentation
 ```
 
 ## ⚡ Getting Started
@@ -129,21 +138,15 @@ This enables better continuity of care, data sharing, and integration with natio
 
 ---
 
-## 🚀 Deployment
+## 🌐 Deployment
 
-The application is deployed and live on **Vercel**.
+This project is deployed using **Vercel** for instant updates and global CDN performance.
 
-- **Production URL**: [https://sih-ayush-fhir.vercel.app/](https://sih-ayush-fhir.vercel.app/)
-- **Platform**: Vercel (Serverless)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat&logo=vercel)](https://sih-ayush-fhir.vercel.app/)
 
-### How to Deploy
-
-1. **Push to GitHub**: Changes pushed to the `main` branch are automatically deployed.
-2. **Manual Deployment**: You can also use the Vercel CLI:
-
-    ```bash
-    vercel --prod
-    ```
+1. Updates are pushed to **GitHub**.
+2. **Vercel** automatically rebuilds and deploys the changes.
+3. The live site is updated instantly 🌍 [Visit Live Site](https://sih-ayush-fhir.vercel.app/)
 
 ---
 

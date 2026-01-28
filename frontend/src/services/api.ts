@@ -33,10 +33,13 @@ api.interceptors.response.use(
   (error) => {
     const message = error.response?.data?.message || error.message || 'An error occurred';
 
+    const message = error.response?.data?.message || error.message || 'An error occurred';
+
     if (error.response?.status === 401) {
       localStorage.removeItem('authToken');
       toast.error('Session expired. Please login again.');
-    } else if (error.response?.status >= 500) {
+    } else if (error.response?.status >= 500 && !error.response?.data?.message) {
+      // Only show generic error if no specific message is provided by backend
       toast.error('Server error. Please try again later.');
     } else {
       toast.error(message);

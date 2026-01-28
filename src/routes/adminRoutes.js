@@ -91,11 +91,19 @@ module.exports = (dataStore, csvParser) => {
           filesInApiData = fs.readdirSync(apiDataDir).join(', ');
         }
 
+        // Debug 'api' dir itself
+        let filesInApi = 'api dir not found';
+        const apiDir = path.join(cwd, 'api');
+        if (fs.existsSync(apiDir)) {
+          filesInApi = fs.readdirSync(apiDir).join(', ');
+        }
+
         throw new Error(
           `DEBUG INFO: File not found at ${sampleCSVPath}. ` +
           `CWD: ${cwd}. ` +
           `Files in CWD: [${filesInCwd.join(', ')}]. ` +
           `Files in data: [${filesInData}]. ` +
+          `Files in api: [${filesInApi}]. ` +
           `Files in api/data: [${filesInApiData}]`
         );
       }

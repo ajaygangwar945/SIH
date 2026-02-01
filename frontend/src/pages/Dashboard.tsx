@@ -69,35 +69,35 @@ const Dashboard: React.FC = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden rounded-2xl shadow-lg">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-accent-600 to-secondary-600 opacity-90"></div>
-        <div className="relative bg-white bg-opacity-10 backdrop-blur-sm p-8 text-white">
-          <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-white bg-opacity-20 rounded-xl">
+        <div className="relative bg-white bg-opacity-10 backdrop-blur-sm p-6 sm:p-8 text-white">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6 text-center sm:text-left">
+            <div className="p-3 bg-white bg-opacity-20 rounded-xl shrink-0">
               <Stethoscope className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Ayush FHIR Microservice</h1>
-              <p className="text-white text-opacity-90">Traditional Indian Medicine meets Modern Healthcare Standards</p>
+              <h1 className="text-2xl sm:text-3xl font-bold">Ayush FHIR Microservice</h1>
+              <p className="text-sm sm:text-base text-white text-opacity-90">Traditional Indian Medicine meets Modern Healthcare Standards</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="bg-white bg-opacity-10 rounded-lg p-4">
               <div className="flex items-center space-x-3">
-                <Database className="h-6 w-6" />
+                <Database className="h-6 w-6 shrink-0" />
                 <div>
-                  <p className="text-sm text-white text-opacity-80">Total Terms</p>
-                  <p className="text-2xl font-bold">{statsData?.statistics?.totalTerms || 0}</p>
+                  <p className="text-xs sm:text-sm text-white text-opacity-80 leading-none mb-1">Total Terms</p>
+                  <p className="text-xl sm:text-2xl font-bold">{statsData?.statistics?.totalTerms || 0}</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-white bg-opacity-10 rounded-lg p-4">
               <div className="flex items-center space-x-3">
-                <Activity className="h-6 w-6" />
+                <Activity className="h-6 w-6 shrink-0" />
                 <div>
-                  <p className="text-sm text-white text-opacity-80">System Status</p>
+                  <p className="text-xs sm:text-sm text-white text-opacity-80 leading-none mb-1">System Status</p>
                   <p
-                    className={`text-2xl font-bold ${isSystemHealthy ? 'text-green-300' : 'text-red-300'
+                    className={`text-xl sm:text-2xl font-bold ${isSystemHealthy ? 'text-green-300' : 'text-red-300'
                       }`}
                   >
                     {systemStatusLabel}
@@ -108,10 +108,10 @@ const Dashboard: React.FC = () => {
 
             <div className="bg-white bg-opacity-10 rounded-lg p-4">
               <div className="flex items-center space-x-3">
-                <Globe className="h-6 w-6" />
+                <Globe className="h-6 w-6 shrink-0" />
                 <div>
-                  <p className="text-sm text-white text-opacity-80">Environment</p>
-                  <p className="text-2xl font-bold text-green-300">{environmentLabel}</p>
+                  <p className="text-xs sm:text-sm text-white text-opacity-80 leading-none mb-1">Environment</p>
+                  <p className="text-xl sm:text-2xl font-bold text-green-300">{environmentLabel}</p>
                 </div>
               </div>
             </div>

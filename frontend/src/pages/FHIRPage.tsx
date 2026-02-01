@@ -205,10 +205,10 @@ const FHIRPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                   <button
                     onClick={() => handleCopy(JSON.stringify(codeSystemMutation.data.data, null, 2), 'codesystem')}
-                    className="btn-outline flex items-center space-x-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="btn-outline flex items-center justify-center space-x-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     {copiedResource === 'codesystem' ? (
                       <Check className="h-4 w-4" />
@@ -220,7 +220,7 @@ const FHIRPage: React.FC = () => {
 
                   <button
                     onClick={() => handleDownload(codeSystemMutation.data.data, 'codesystem')}
-                    className="btn-primary flex items-center space-x-2"
+                    className="btn-primary flex items-center justify-center space-x-2"
                   >
                     <Download className="h-4 w-4" />
                     <span>Download</span>
@@ -229,14 +229,16 @@ const FHIRPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6">
-              <div className="bg-gray-900 rounded-lg overflow-hidden">
+            <div className="p-4 sm:p-6">
+              <div className="bg-gray-900 rounded-xl overflow-hidden shadow-inner">
                 <SyntaxHighlighter
                   language="json"
                   customStyle={{
                     margin: 0,
-                    fontSize: '14px',
-                    maxHeight: '500px'
+                    padding: '1.25rem',
+                    fontSize: '13px',
+                    maxHeight: '500px',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   {JSON.stringify(codeSystemMutation.data.data, null, 2)}
@@ -270,10 +272,10 @@ const FHIRPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                   <button
                     onClick={() => handleCopy(JSON.stringify(conceptMapMutation.data.data, null, 2), 'conceptmap')}
-                    className="btn-outline flex items-center space-x-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="btn-outline flex items-center justify-center space-x-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
                     {copiedResource === 'conceptmap' ? (
                       <Check className="h-4 w-4" />
@@ -285,7 +287,7 @@ const FHIRPage: React.FC = () => {
 
                   <button
                     onClick={() => handleDownload(conceptMapMutation.data.data, 'conceptmap')}
-                    className="btn-primary flex items-center space-x-2"
+                    className="btn-primary flex items-center justify-center space-x-2"
                   >
                     <Download className="h-4 w-4" />
                     <span>Download</span>
@@ -294,14 +296,16 @@ const FHIRPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6">
-              <div className="bg-gray-900 rounded-lg overflow-hidden">
+            <div className="p-4 sm:p-6">
+              <div className="bg-gray-900 rounded-xl overflow-hidden shadow-inner">
                 <SyntaxHighlighter
                   language="json"
                   customStyle={{
                     margin: 0,
-                    fontSize: '14px',
-                    maxHeight: '500px'
+                    padding: '1.25rem',
+                    fontSize: '13px',
+                    maxHeight: '500px',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   {JSON.stringify(conceptMapMutation.data.data, null, 2)}

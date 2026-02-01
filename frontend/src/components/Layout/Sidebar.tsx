@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Home,
   Search,
@@ -90,48 +90,86 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
       </motion.aside>
 
-      {/* Mobile Sidebar */}
-      <motion.aside
-        initial={{ x: -300 }}
-        animate={{ x: isOpen ? 0 : -300 }}
-        transition={{ type: 'tween', duration: 0.3 }}
-        className="lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16 transition-colors duration-200"
-      >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Navigation</h2>
-            <button
+      {/* Mobile Sidebar - Overlay and Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={onClose}
-              className="p-2 text-gray-400 hover:text-gray-600"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
+              className="lg:hidden fixed inset-0 z-40 bg-gray-900/60 backdrop-blur-sm"
+            />
 
-          <nav className="flex-1 px-4 py-4 space-y-1">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href;
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={onClose}
-                  className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${isActive
-                    ? 'bg-primary-100 dark:bg-primary-900/40 text-primary-900 dark:text-primary-100'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
-                    }`}
-                >
-                  <item.icon
-                    className={`mr-3 h-5 w-5 ${isActive ? 'text-primary-600' : 'text-gray-400 group-hover:text-gray-500'
-                      }`}
-                  />
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-      </motion.aside>
+            {/* Drawer */}
+            <motion.aside
+              initial={{ x: -280 }}
+              animate={{ x: 0 }}
+              exit={{ x: -280 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="lg:hidden fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 shadow-2xl transition-colors duration-200"
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-1.5 bg-primary-600 rounded-lg">
+                      <Activity className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600">
+                      Ayush FHIR
+                    </span>
+                  </div>
+                  <button
+                    onClick={onClose}
+                    className="p-2 -mr-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    title="Close Menu"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+
+                <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+                  {navigation.map((item) => {
+                    const isActive = location.pathname === item.href;
+                    return (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        onClick={onClose}
+                        className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${isActive
+                          ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 shadow-sm'
+                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                          }`}
+                      >
+                        <item.icon
+                          className={`mr-3 h-5 w-5 transition-colors ${isActive ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-primary-500'
+                            }`}
+                        />
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </nav>
+
+                <div className="p-6 border-t border-gray-100 dark:border-gray-700/50">
+                  <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">System Live</span>
+                    </div>
+                    <p className="text-[10px] text-gray-400 dark:text-gray-500 leading-tight">
+                      NAMASTE Terminology v2.4.1<br />
+                      ICD-11 TM2 Interoperability Layer
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

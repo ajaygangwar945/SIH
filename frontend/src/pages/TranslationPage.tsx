@@ -97,14 +97,15 @@ const TranslationPage: React.FC = () => {
         {/* Translation Interface */}
         <div className="space-y-6">
           {/* Source System Selection */}
-          <div className="flex items-center justify-center space-x-4">
-            <div className="flex-1 max-w-md">
+          <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 space-y-4 md:space-y-0">
+            <div className="w-full md:flex-1 md:max-w-md">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Source System
               </label>
               <select
                 value={sourceSystem}
                 onChange={(e) => setSourceSystem(e.target.value as 'NAMASTE' | 'ICD-11-TM2')}
+                title="Source System Selection"
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="NAMASTE">NAMASTE (Traditional Medicine)</option>
@@ -114,25 +115,25 @@ const TranslationPage: React.FC = () => {
 
             <button
               onClick={swapSystems}
-              className="p-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition-colors mt-6"
+              className="p-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition-colors md:mt-6 shrink-0"
               title="Swap systems"
             >
               <RefreshCw className="h-5 w-5 text-gray-600 dark:text-gray-300" />
             </button>
 
-            <div className="flex-1 max-w-md">
+            <div className="w-full md:flex-1 md:max-w-md">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Target System
               </label>
-              <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-400">
+              <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-400 flex items-center h-10">
                 {sourceSystem === 'NAMASTE' ? 'ICD-11 TM2 (International)' : 'NAMASTE (Traditional Medicine)'}
               </div>
             </div>
           </div>
 
           {/* Source Code Input */}
-          <div className="flex items-center justify-center space-x-4">
-            <div className="flex-1 max-w-md">
+          <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 space-y-4 md:space-y-0">
+            <div className="w-full md:flex-1 md:max-w-md">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Source Code
               </label>
@@ -148,11 +149,11 @@ const TranslationPage: React.FC = () => {
             <button
               onClick={handleTranslate}
               disabled={translateMutation.isLoading || !sourceCode.trim()}
-              className="btn-primary px-6 py-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full md:w-auto btn-primary px-8 py-2 md:mt-6 disabled:opacity-50 disabled:cursor-not-allowed h-10 flex items-center justify-center font-bold"
             >
               {translateMutation.isLoading ? (
                 <div className="flex items-center space-x-2">
-                  <div className="spinner"></div>
+                  <div className="spinner border-white"></div>
                   <span>Translating...</span>
                 </div>
               ) : (

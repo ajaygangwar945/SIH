@@ -72,36 +72,36 @@ const AnalyticsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-            <BarChart3 className="h-6 w-6 text-green-600 dark:text-green-400" />
+          <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg shrink-0">
+            <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 dark:text-green-400" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400">System performance and usage insights</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics Dashboard</h1>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">System performance and usage insights</p>
           </div>
         </div>
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Terms</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Total Terms</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {statsData?.statistics?.totalTerms || 0}
               </p>
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">+12% from last month</p>
+              <p className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 mt-1 uppercase font-bold tracking-wider">+12% growth</p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <Database className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="p-2 sm:p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg shrink-0">
+              <Database className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
         </motion.div>
@@ -110,18 +110,18 @@ const AnalyticsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Categories</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Categories</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {statsData?.statistics?.categoryCount || 0}
               </p>
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">+2 new this month</p>
+              <p className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 mt-1 uppercase font-bold tracking-wider">+2 Added</p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
-              <PieChart className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <div className="p-2 sm:p-3 bg-green-100 dark:bg-green-900/30 rounded-lg shrink-0">
+              <PieChart className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 dark:text-green-400" />
             </div>
           </div>
         </motion.div>
@@ -130,18 +130,18 @@ const AnalyticsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Mapped Terms</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Mapped Terms</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {Math.floor((statsData?.statistics?.totalTerms || 0) * 0.6)}
               </p>
-              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">60% mapping rate</p>
+              <p className="text-[10px] sm:text-xs text-blue-600 dark:text-blue-400 mt-1 uppercase font-bold tracking-wider">60% Rate</p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-              <TrendingUp className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            <div className="p-2 sm:p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg shrink-0">
+              <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 dark:text-purple-400" />
             </div>
           </div>
         </motion.div>
@@ -150,44 +150,44 @@ const AnalyticsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Cache Hit Rate</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Cache Hits</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {statsData?.statistics?.cacheStats ?
                   Math.round((statsData.statistics.cacheStats.hits / (statsData.statistics.cacheStats.hits + statsData.statistics.cacheStats.misses)) * 100) : 0}%
               </p>
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">Excellent performance</p>
+              <p className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 mt-1 uppercase font-bold tracking-wider">Performing</p>
             </div>
-            <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-              <Activity className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+            <div className="p-2 sm:p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg shrink-0">
+              <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600 dark:text-orange-400" />
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Category Distribution */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors"
         >
           <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <PieChart className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg shrink-0">
+              <PieChart className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Category Distribution</h2>
-              <p className="text-gray-600 dark:text-gray-400">Terms by medical system</p>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 leading-tight">Category Distribution</h2>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Terms by medical system</p>
             </div>
           </div>
 
-          <div className="h-80">
+          <div className="h-64 sm:h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsPieChart>
                 <Pie
@@ -196,7 +196,7 @@ const AnalyticsPage: React.FC = () => {
                   cy="50%"
                   labelLine={false}
                   label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={80}
+                  outerRadius="80%"
                   fill="#8884d8"
                   dataKey="value"
                 >
@@ -294,38 +294,38 @@ const AnalyticsPage: React.FC = () => {
       </motion.div>
 
       {/* System Health */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center space-x-3 mb-4">
-            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-              <Activity className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg shrink-0">
+              <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 dark:text-green-400" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">System Health</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100">System Health</h3>
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Backend API</span>
-              <span className="px-2 py-1 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-medium rounded-full">
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Backend API</span>
+              <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-[10px] font-bold rounded-full uppercase">
                 Healthy
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Database</span>
-              <span className="px-2 py-1 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-medium rounded-full">
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Database</span>
+              <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-[10px] font-bold rounded-full uppercase">
                 Connected
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">ICD-11 API</span>
-              <span className="px-2 py-1 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-medium rounded-full">
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">ICD-11 API</span>
+              <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-[10px] font-bold rounded-full uppercase">
                 Available
               </span>
             </div>
@@ -336,29 +336,29 @@ const AnalyticsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors"
         >
           <div className="flex items-center space-x-3 mb-4">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg shrink-0">
+              <Users className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">User Activity</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100">Engagement</h3>
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Active Sessions</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">12</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Active Sessions</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">12</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Today's Searches</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">156</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Daily Searches</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">156</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">API Calls</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">1,247</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">API Calls</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">1,247</span>
             </div>
           </div>
         </motion.div>
@@ -367,29 +367,29 @@ const AnalyticsPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors sm:col-span-2 lg:col-span-1"
         >
           <div className="flex items-center space-x-3 mb-4">
-            <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-              <Globe className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg shrink-0">
+              <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 dark:text-purple-400" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Global Reach</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100">Context</h3>
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Countries</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">23</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Countries</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">23</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Languages</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">8</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Languages</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">8</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-300">Healthcare Systems</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">45</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Systems</span>
+              <span className="text-sm sm:text-base font-bold text-gray-900 dark:text-gray-100">45</span>
             </div>
           </div>
         </motion.div>

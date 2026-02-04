@@ -1,4 +1,4 @@
-<img src="/frontend/public/Gemini_Generated_Image_k6g886k6g886k6g8.png" height="200" width="100%" align="center">
+<img src="frontend/public/project_banner.png"  width="100%" height="200" style="object-fit: cover">
 
 <div align="center">
 

@@ -46,7 +46,7 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
     },
     {
       title: 'Cache Hit Rate',
-      value: data?.cacheStats ?
+      value: data?.cacheStats && (data.cacheStats.hits + data.cacheStats.misses) > 0 ?
         Math.round((data.cacheStats.hits / (data.cacheStats.hits + data.cacheStats.misses)) * 100) : 0,
       icon: TrendingUp,
       color: 'text-orange-600',

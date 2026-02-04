@@ -16,6 +16,8 @@ import { apiEndpoints } from '../services/api.ts';
 import LoadingSpinner from '../components/Common/LoadingSpinner.tsx';
 import toast from 'react-hot-toast';
 
+import { useActivity } from '../context/ActivityContext.tsx';
+
 interface SearchResult {
   term: {
     id: string;
@@ -36,6 +38,7 @@ const SearchPage: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [copiedId, setCopiedId] = useState<string>('');
+  const { addActivity } = useActivity();
 
   // Debounce search query
   useEffect(() => {
@@ -44,6 +47,13 @@ const SearchPage: React.FC = () => {
     }, 300);
     return () => clearTimeout(timer);
   }, [query]);
+
+  // Log search activity
+  useEffect(() => {
+    if (debouncedQuery.length >= 2) {
+      addActivity('search', `Searched for "${debouncedQuery}"`);
+    }
+  }, [debouncedQuery, addActivity]);
 
   // Fetch search results
   const { data: searchResults, isLoading, error } = useQuery<SearchResult[]>(
@@ -62,7 +72,8 @@ const SearchPage: React.FC = () => {
     'statistics',
     async () => {
       const response = await apiEndpoints.getStatistics();
-      return (response.data.statistics?.categories as string[]) || [];
+      const categories = response.data.statistics?.categories;
+      return Array.isArray(categories) ? categories : [];
     },
     { refetchOnWindowFocus: false }
   );
@@ -127,7 +138,7 @@ const SearchPage: React.FC = () => {
               className="flex-1 sm:w-48 px-3 py-1.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
             >
               <option value="">All Categories</option>
-              {statsData?.map((category: string) => (
+              {Array.isArray(statsData) && statsData.map((category: string) => (
                 <option key={category} value={category}>
                   {category}
                 </option>

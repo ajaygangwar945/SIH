@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { apiEndpoints } from '../services/api.ts';
 import toast from 'react-hot-toast';
+import { useActivity } from '../context/ActivityContext.tsx';
 
 interface TranslationResult {
   code: string;
@@ -33,13 +34,15 @@ const TranslationPage: React.FC = () => {
   const [sourceCode, setSourceCode] = useState('');
   const [sourceSystem, setSourceSystem] = useState<'NAMASTE' | 'ICD-11-TM2'>('NAMASTE');
   const [copiedText, setCopiedText] = useState<string>('');
+  const { addActivity } = useActivity();
 
   // Translation mutation
-  const translateMutation = useMutation<{ data: TranslationResponse }, Error, { code: string; system: string }>(
-    (data: { code: string; system: string }) => apiEndpoints.translateCode(data.code, data.system),
+  const translateMutation = useMutation<{ data: TranslationResponse }, Error, { code: string; system: 'NAMASTE' | 'ICD-11-TM2' }>(
+    (data) => apiEndpoints.translateCode(data.code, data.system),
     {
-      onSuccess: () => {
+      onSuccess: (data, variables) => {
         toast.success('Translation completed!');
+        addActivity('translation', `Translated ${variables.code}`);
       },
       onError: () => {
         toast.error('Translation failed. Please check the code and try again.');

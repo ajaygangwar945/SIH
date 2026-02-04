@@ -51,11 +51,11 @@ class CSVParser {
 
       stream.on('data', (data) => {
         lineNumber++;
-        
+
         try {
           // Create NAMASTE term from CSV row
           const term = new NamesteTerm(data);
-          
+
           // Validate term
           const validation = term.validate();
           if (!validation.isValid) {
@@ -109,7 +109,7 @@ class CSVParser {
    * @returns {Object} Validation result
    */
   validateHeaders(headers) {
-    const missingRequired = this.requiredColumns.filter(col => 
+    const missingRequired = this.requiredColumns.filter(col =>
       !headers.some(header => header.toLowerCase() === col.toLowerCase())
     );
 
@@ -154,47 +154,42 @@ class CSVParser {
    * @returns {Promise<Object>} Parse result
    */
   async parseCSVFromString(csvContent) {
+    const { Readable } = require('stream');
+
     return new Promise((resolve, reject) => {
       const results = [];
       const errors = [];
       let lineNumber = 1;
 
-      const lines = csvContent.split('\n');
-      if (lines.length === 0) {
-        return reject(new Error('Empty CSV content'));
-      }
+      // Create stream from string
+      const stream = Readable.from([csvContent])
+        .pipe(csv({
+          skipEmptyLines: true,
+          skipLinesWithError: false
+        }));
 
-      // Parse header
-      const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-      const headerValidation = this.validateHeaders(headers);
-      
-      if (!headerValidation.isValid) {
-        errors.push({
-          line: 1,
-          type: 'HEADER_ERROR',
-          message: headerValidation.message,
-          data: headers
-        });
-      }
+      stream.on('headers', (headers) => {
+        // Validate headers
+        const headerValidation = this.validateHeaders(headers);
+        if (!headerValidation.isValid) {
+          errors.push({
+            line: 1,
+            type: 'HEADER_ERROR',
+            message: headerValidation.message,
+            data: headers
+          });
+        }
+      });
 
-      // Parse data rows
-      for (let i = 1; i < lines.length; i++) {
+      stream.on('data', (data) => {
         lineNumber++;
-        const line = lines[i].trim();
-        
-        if (!line) continue; // Skip empty lines
 
         try {
-          const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
-          const data = {};
-          
-          headers.forEach((header, index) => {
-            data[header] = values[index] || '';
-          });
-
+          // Create NAMASTE term from CSV row
           const term = new NamesteTerm(data);
+
+          // Validate term
           const validation = term.validate();
-          
           if (!validation.isValid) {
             errors.push({
               line: lineNumber,
@@ -210,26 +205,32 @@ class CSVParser {
             line: lineNumber,
             type: 'PARSE_ERROR',
             message: error.message,
-            data: line
+            data: data
           });
         }
-      }
+      });
 
-      // Check for duplicates
-      const duplicateErrors = this.checkDuplicateIds(results);
-      errors.push(...duplicateErrors);
+      stream.on('end', () => {
+        // Check for duplicate IDs
+        const duplicateErrors = this.checkDuplicateIds(results);
+        errors.push(...duplicateErrors);
 
-      resolve({
-        success: errors.length === 0,
-        totalRows: lineNumber - 1,
-        validTerms: results.length,
-        terms: results,
-        errors: errors,
-        summary: {
-          parsed: results.length,
-          failed: errors.filter(e => e.type !== 'HEADER_ERROR').length,
-          duplicates: duplicateErrors.length
-        }
+        resolve({
+          success: errors.length === 0,
+          totalRows: lineNumber - 1,
+          validTerms: results.length,
+          terms: results,
+          errors: errors,
+          summary: {
+            parsed: results.length,
+            failed: errors.filter(e => e.type !== 'HEADER_ERROR').length,
+            duplicates: duplicateErrors.length
+          }
+        });
+      });
+
+      stream.on('error', (error) => {
+        reject(new Error(`CSV parsing failed: ${error.message}`));
       });
     });
   }
@@ -271,7 +272,7 @@ class CSVParser {
 
     const headers = ['id', 'term', 'category', 'synonyms', 'icd11_tm2_code', 'references', 'description'];
     let csv = headers.join(',') + '\n';
-    
+
     sampleData.forEach(row => {
       const values = headers.map(header => `"${row[header] || ''}"`);
       csv += values.join(',') + '\n';

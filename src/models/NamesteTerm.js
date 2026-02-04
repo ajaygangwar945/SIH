@@ -31,7 +31,12 @@ class NamesteTerm {
    * @returns {Array} Array of all searchable terms
    */
   getSearchableTerms() {
-    return [this.term, ...this.synonyms];
+    return [
+      this.term,
+      this.id,
+      this.icd11_tm2_code,
+      ...this.synonyms
+    ].filter(t => t); // Filter out null/undefined
   }
 
   /**
@@ -41,7 +46,7 @@ class NamesteTerm {
    */
   matches(query) {
     const lowerQuery = query.toLowerCase();
-    return this.getSearchableTerms().some(term => 
+    return this.getSearchableTerms().some(term =>
       term.toLowerCase().includes(lowerQuery)
     );
   }
@@ -81,6 +86,14 @@ class NamesteTerm {
         score += 20;
       }
     });
+
+    // Check ID and ICD Code
+    if (this.id && this.id.toLowerCase().includes(lowerQuery)) {
+      score += 100;
+    }
+    if (this.icd11_tm2_code && this.icd11_tm2_code.toLowerCase().includes(lowerQuery)) {
+      score += 100;
+    }
 
     return score;
   }

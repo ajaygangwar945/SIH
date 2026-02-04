@@ -17,16 +17,9 @@
 
 ## 🌟 Overview
 
-The **Ayush FHIR Integration Platform** is a robust healthcare interoperability solution designed to bridge the gap between **traditional Ayush medical systems** and **modern digital health ecosystems**.
+The **Ayush FHIR Integration Platform** is a robust healthcare interoperability solution designed to bridge the gap between **traditional Ayush medical systems** (Ayurveda, Yoga, Unani, Siddha, Homoeopathy, Naturopathy) and **modern digital health ecosystems**.
 
-By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the platform ensures that Ayush health records are:
-
-- 📄 Standardized  
-- 🔐 Secure  
-- 🔄 Interoperable  
-- 🌍 Exchangeable across healthcare systems  
-
-This enables better continuity of care, data sharing, and integration with national and global health infrastructures.
+By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the platform ensures that Ayush health records are standardized, secure, and exchangeable across global healthcare systems.
 
 ---
 
@@ -34,11 +27,12 @@ This enables better continuity of care, data sharing, and integration with natio
 
 | Feature | Description |
 |------|-------------|
-| 🔄 **FHIR Data Transformation** | Converts legacy Ayush data formats into standard FHIR resources |
-| 🛡️ **Secure Authentication** | JWT-based authentication with secure access control |
-| 📊 **Analytics Dashboard** | Visual insights into data flow, success rates, and system health |
-| 🔍 **Advanced Search** | Efficient querying of patient records and healthcare resources |
-| 🌐 **API-First Architecture** | RESTful APIs for seamless system-to-system integration |
+| 🔍 **Advanced Search & Browse** | Search terms by **Name**, **ID** (e.g., `AY016`), or **ICD-11 Code**. Supports fuzzy matching and filtering. |
+| 🔄 **FHIR Data Transformation** | Converts traditional Ayush terms into standard **FHIR CodeSystem** and **ValueSet** resources. |
+| 🌐 **Translation Service** | Bidirectional mapping between **NAMASTE** terms and **ICD-11 TM2** codes. |
+| 📊 **Real-time Statistics** | Live dashboard showing Total Terms, Cache Hit Rates, and data distribution. |
+| 🕒 **Activity Tracking** | Dynamic "Recent Activity" feed tracking user actions (searches, uploads, downloads) in real-time. |
+| 🛡️ **Secure Admin Panel** | CSV ingestion with validation, duplicate detection, and robust error handling. |
 
 ---
 
@@ -54,12 +48,11 @@ This enables better continuity of care, data sharing, and integration with natio
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-43853D?style=flat&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-API-black?style=flat)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-4EA94B?style=flat&logo=mongodb&logoColor=white)
+![DataStore](https://img.shields.io/badge/Data-In--Memory-green?style=flat)
 
-### 🧬 Standards & APIs
+### 🧬 Standards
 
 ![HL7](https://img.shields.io/badge/HL7-FHIR_R4-orange?style=flat)
-![JWT](https://img.shields.io/badge/Auth-JWT-blue?style=flat)
 
 ---
 
@@ -67,26 +60,26 @@ This enables better continuity of care, data sharing, and integration with natio
 
 ```
 📦 SIH
- ┣ 📂 api               # Vercel Serverless Functions
- ┃ ┣ 📂 data            # Deployment data bundle
- ┃ ┗ 📜 index.js        # Serverless entry point
+ ┣ 📂 api               # Deployment Data Bundle
+ ┃ ┗ 📂 data            # CSV Datasets
  ┣ 📂 frontend          # React Frontend
- ┃ ┣ 📂 public          # Static assets
- ┃ ┣ 📂 src             # Source code
- ┃ ┃ ┣ 📂 components    # UI Components
- ┃ ┃ ┣ 📂 pages         # Route Pages
- ┃ ┃ ┣ 📂 services      # API Services
- ┃ ┃ ┗ � context       # React Context
+ ┃ ┣ 📂 public          # Static Assets
+ ┃ ┣ 📂 src             # Source Code
+ ┃ ┃ ┣ 📂 components    # UI Components (Dashboard, Layout)
+ ┃ ┃ ┣ 📂 context       # React Context (Activity, Theme)
+ ┃ ┃ ┣ 📂 pages         # Route Pages (Search, Admin, FHIR)
+ ┃ ┃ ┗ 📂 services      # API Client Services
  ┃ ┗ 📜 package.json
  ┣ 📂 src               # Node.js Backend
- ┃ ┣ 📂 models          # Mongoose Models
- ┃ ┣ 📂 routes          # Express Routes
- ┃ ┣ 📂 services        # Business Logic
+ ┃ ┣ 📂 models          # Data Models (NamesteTerm)
+ ┃ ┣ 📂 routes          # Express Routes (API Endpoints)
+ ┃ ┣ 📂 services        # Business Logic (CSVParser, FHIRService)
+ ┃ ┣ 📂 tests           # Unit Tests
  ┃ ┗ 📜 server.js       # Backend Entry Point
- ┣ 📂 data              # Sample Data
- ┣ 📜 vercel.json       # Vercel Configuration
  ┗ 📜 README.md         # Documentation
 ```
+
+---
 
 ## ⚡ Getting Started
 
@@ -94,7 +87,6 @@ This enables better continuity of care, data sharing, and integration with natio
 
 - **Node.js** (v14 or higher)
 - **npm** or **yarn**
-- **MongoDB** instance
 
 ### Installation
 
@@ -124,7 +116,7 @@ This enables better continuity of care, data sharing, and integration with natio
 
     ```bash
     # From the root directory
-    npm start
+    npm run dev
     ```
 
 2. **Start the Frontend Development Server**

@@ -15,12 +15,14 @@ import {
 } from 'lucide-react';
 import { apiEndpoints } from '../services/api.ts';
 import toast from 'react-hot-toast';
+import { useActivity } from '../context/ActivityContext.tsx';
 
 const AdminPage: React.FC = () => {
   const [csvContent, setCsvContent] = useState('');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
+  const { addActivity } = useActivity();
 
   // Fetch statistics
   const { data: statsData, isLoading: statsLoading } = useQuery(
@@ -36,6 +38,7 @@ const AdminPage: React.FC = () => {
       onSuccess: () => {
         toast.success('CSV uploaded and processed successfully!');
         setUploadStatus('success');
+        addActivity('upload', 'Uploaded CSV file');
         queryClient.invalidateQueries('statistics');
         queryClient.invalidateQueries('search');
       },

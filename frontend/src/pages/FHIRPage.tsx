@@ -15,11 +15,13 @@ import {
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { apiEndpoints } from '../services/api.ts';
 import toast from 'react-hot-toast';
+import { useActivity } from '../context/ActivityContext.tsx';
 
 const FHIRPage: React.FC = () => {
   const [showCodeSystem, setShowCodeSystem] = useState(false);
   const [showConceptMap, setShowConceptMap] = useState(false);
   const [copiedResource, setCopiedResource] = useState<string>('');
+  const { addActivity } = useActivity();
 
   // Generate CodeSystem mutation
   const codeSystemMutation = useMutation(
@@ -67,6 +69,8 @@ const FHIRPage: React.FC = () => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     toast.success(`${type === 'codesystem' ? 'CodeSystem' : 'ConceptMap'} downloaded!`);
+
+    addActivity('download', `Downloaded ${type === 'codesystem' ? 'CodeSystem' : 'ConceptMap'}`);
   };
 
   return (

@@ -15,11 +15,13 @@
 
 ---
 
-## 🌟 Overview
+## 🌟 Overview & Mission
 
-The **Ayush FHIR Integration Platform** is a robust healthcare interoperability solution designed to bridge the gap between **traditional Ayush medical systems** (Ayurveda, Yoga, Unani, Siddha, Homoeopathy, Naturopathy) and **modern digital health ecosystems**.
+The **Ayush FHIR Integration Platform** is a specialized healthcare interoperability solution dedicated to the digital transformation of **Traditional Indian Medicine** (Ayurveda, Yoga, Unani, Siddha, Homoeopathy).
 
-By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the platform ensures that Ayush health records are standardized, secure, and exchangeable across global healthcare systems.
+### 🎯 Our Mission
+
+To create a seamless, standardized, and secure bridge between ancient medical wisdom and modern clinical data standards (HL7 FHIR), enabling traditional healthcare practitioners to participate in the global digital health ecosystem while maintaining the unique integrity of Ayush terminology.
 
 ---
 
@@ -27,12 +29,12 @@ By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the pla
 
 | Feature | Description |
 |------|-------------|
-| 🔍 **Advanced Search & Browse** | Search terms by **Name**, **ID** (e.g., `AY016`), or **ICD-11 Code**. Supports fuzzy matching and filtering. |
-| 🔄 **FHIR Data Transformation** | Converts traditional Ayush terms into standard **FHIR CodeSystem** and **ValueSet** resources. |
-| 🌐 **Translation Service** | Bidirectional mapping between **NAMASTE** terms and **ICD-11 TM2** codes. |
-| 📊 **Real-time Statistics** | Live dashboard showing Total Terms, Cache Hit Rates, and data distribution. |
-| 🕒 **Activity Tracking** | Dynamic "Recent Activity" feed tracking user actions (searches, uploads, downloads) in real-time. |
-| 🛡️ **Secure Admin Panel** | CSV ingestion with validation, duplicate detection, and robust error handling. |
+| 🔍 **Advanced Search** | High-performance search for NAMASTE terms with fuzzy matching and ICD-11 cross-referencing. |
+| 🔄 **FHIR Resource Engine** | Auto-generation of HL7 FHIR CodeSystem and ConceptMap resources from CSV datasets. |
+| 🌐 **Translation Hub** | Bidirectional terminology mapping between NAMASTE (Traditional) and ICD-11 TM2 (International). |
+| 📊 **Dynamic Analytics** | Real-time monitoring of terminology distribution, search trends, and system health. |
+| 🛡️ **Admin Suite** | Comprehensive tools for **User Management**, **System Settings**, and **Secure CSV Data Ingestion**. |
+| 📱 **Mobile-First UI** | Fully responsive interface optimized for clinical use on tablets, phones, and desktops. |
 
 ---
 
@@ -40,43 +42,44 @@ By leveraging **HL7 FHIR (Fast Healthcare Interoperability Resources)**, the pla
 
 ### 🎨 Frontend
 
-![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+- **React 18** & **TypeScript**
+- **Tailwind CSS** for responsive design
+- **Framer Motion** for smooth UI transitions
+- **React Query** for efficient data fetching
 
 ### ⚙️ Backend
 
-![Node.js](https://img.shields.io/badge/Node.js-18+-43853D?style=flat&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-API-black?style=flat)
-![DataStore](https://img.shields.io/badge/Data-In--Memory-green?style=flat)
-
-### 🧬 Standards
-
-![HL7](https://img.shields.io/badge/HL7-FHIR_R4-orange?style=flat)
+- **Node.js** & **Express**
+- **In-Memory DataStore** with persistent CSV synchronization
+- **HL7 FHIR R4** Standardization Logic
+- **Jest** for automated API testing
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 📦 SIH
- ┣ 📂 api               # Deployment Data Bundle
- ┃ ┗ 📂 data            # CSV Datasets
- ┣ 📂 frontend          # React Frontend
- ┃ ┣ 📂 public          # Static Assets
- ┃ ┣ 📂 src             # Source Code
- ┃ ┃ ┣ 📂 components    # UI Components (Dashboard, Layout)
- ┃ ┃ ┣ 📂 context       # React Context (Activity, Theme)
- ┃ ┃ ┣ 📂 pages         # Route Pages (Search, Admin, FHIR)
- ┃ ┃ ┗ 📂 services      # API Client Services
+ ┣ 📂 api               # Serverless Deployment Bundle
+ ┃ ┣ 📂 data            # Standardized CSV Datasets
+ ┃ ┗ 📜 index.js        # Vercel Entry Point
+ ┣ 📂 frontend          # React + TypeScript Frontend
+ ┃ ┣ 📂 public          # Static Media & Icons
+ ┃ ┣ 📂 src             # Application Source
+ ┃ ┃ ┣ 📂 components    # Layout & Dashboard UI
+ ┃ ┃ ┣ 📂 context       # Activity Tracking Context
+ ┃ ┃ ┣ 📂 pages         # Core Workflows (Search, Auth, Users, etc.)
+ ┃ ┃ ┗ 📂 services      # API Client Utilities
  ┃ ┗ 📜 package.json
- ┣ 📂 src               # Node.js Backend
- ┃ ┣ 📂 models          # Data Models (NamesteTerm)
- ┃ ┣ 📂 routes          # Express Routes (API Endpoints)
- ┃ ┣ 📂 services        # Business Logic (CSVParser, FHIRService)
- ┃ ┣ 📂 tests           # Unit Tests
- ┃ ┗ 📜 server.js       # Backend Entry Point
- ┗ 📜 README.md         # Documentation
+ ┣ 📂 src               # Node.js Core Backend
+ ┃ ┣ 📂 models          # Data Entity Definitions
+ ┃ ┣ 📂 routes          # API Resource Handlers
+ ┃ ┣ 📂 services        # FHIR & Mapping Business Logic
+ ┃ ┣ 📂 tests           # Verification Suite
+ ┃ ┣ 📂 utils           # Shared Utilities
+ ┃ ┗ 📜 server.js       # Core API Server
+ ┣ 📂 scripts           # Data Utility Scripts
+ ┗ 📜 README.md         # Full Documentation
 ```
 
 ---

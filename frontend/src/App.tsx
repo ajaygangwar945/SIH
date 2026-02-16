@@ -13,6 +13,10 @@ const TranslationPage = React.lazy(() => import('./pages/TranslationPage.tsx'));
 const FHIRPage = React.lazy(() => import('./pages/FHIRPage.tsx'));
 const AdminPage = React.lazy(() => import('./pages/AdminPage.tsx'));
 const AuthPage = React.lazy(() => import('./pages/AuthPage.tsx'));
+const SystemSettingsPage = React.lazy(() => import('./pages/SystemSettingsPage.tsx'));
+const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage.tsx'));
+const UploadPage = React.lazy(() => import('./pages/UploadPage.tsx'));
+const ExportPage = React.lazy(() => import('./pages/ExportPage.tsx'));
 
 const AnalyticsPage = React.lazy(() => import('./pages/AnalyticsPage.tsx'));
 
@@ -35,6 +39,10 @@ const App: React.FC = () => {
                 <Route path="/fhir" element={<FHIRPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/settings" element={<SystemSettingsPage />} />
+                <Route path="/users" element={<UserManagementPage />} />
+                <Route path="/upload" element={<UploadPage />} />
+                <Route path="/export" element={<ExportPage />} />
 
                 <Route path="/analytics" element={<AnalyticsPage />} />
               </Routes>

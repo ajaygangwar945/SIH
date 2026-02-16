@@ -42,7 +42,7 @@ const QuickActions: React.FC = () => {
       title: 'Upload Data',
       description: 'Ingest CSV files with NAMASTE terminology',
       icon: Upload,
-      href: '/admin',
+      href: '/upload',
       color: 'from-orange-500 to-orange-600',
       bgColor: 'bg-orange-50'
     },
@@ -50,7 +50,7 @@ const QuickActions: React.FC = () => {
       title: 'Export Resources',
       description: 'Download FHIR resources and mappings',
       icon: Download,
-      href: '/fhir',
+      href: '/export',
       color: 'from-indigo-500 to-indigo-600',
       bgColor: 'bg-indigo-50'
     },
@@ -58,7 +58,7 @@ const QuickActions: React.FC = () => {
       title: 'System Settings',
       description: 'Configure API settings and preferences',
       icon: Settings,
-      href: '/admin',
+      href: '/settings',
       color: 'from-gray-500 to-gray-600',
       bgColor: 'bg-gray-50'
     },
@@ -74,7 +74,7 @@ const QuickActions: React.FC = () => {
       title: 'User Management',
       description: 'Manage users and access controls',
       icon: Users,
-      href: '/admin',
+      href: '/users',
       color: 'from-cyan-500 to-cyan-600',
       bgColor: 'bg-cyan-50'
     }

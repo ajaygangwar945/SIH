@@ -25,7 +25,7 @@ beforeEach(async () => {
 });
 
 describe('API Endpoints', () => {
-  
+
   // Test Health Check Endpoint
   describe('GET /health', () => {
     it('should return a healthy status', async () => {
@@ -47,7 +47,7 @@ describe('API Endpoints', () => {
 
   // Test Terminology API
   describe('Terminology API (/api/terminology)', () => {
-    
+
     // Test Search Endpoint
     describe('GET /search', () => {
       it('should return search results for a valid query', async () => {
@@ -113,13 +113,15 @@ describe('API Endpoints', () => {
 
   // Test Admin API
   describe('Admin API (/admin)', () => {
-    
+
     // Test Get Statistics Endpoint
     describe('GET /statistics', () => {
       it('should return data store statistics', async () => {
         const res = await request(app).get('/admin/statistics');
         expect(res.statusCode).toEqual(200);
         expect(res.body.statistics).toHaveProperty('totalTerms');
+        expect(res.body.statistics).toHaveProperty('mappedTerms');
+        expect(res.body.statistics).toHaveProperty('cacheStats');
         expect(res.body.statistics.totalTerms).toBeGreaterThan(0);
       });
     });
@@ -152,7 +154,7 @@ TEST001,"Test Term","Test Category","Synonym 1,Synonym 2","TEST-CODE"`;
         const res = await request(app)
           .post('/admin/ingest-csv')
           .send({ csvData });
-        
+
         expect(res.statusCode).toEqual(200);
         expect(res.body.success).toBe(true);
         expect(res.body.parsing.parsed).toBe(1);

@@ -191,6 +191,9 @@ class AyushFHIRServer {
           minScore: parseFloat(minScore)
         });
 
+        // Record search for analytics
+        this.dataStore.recordSearch(q, results.length);
+
         res.json({
           query: q,
           results: results,

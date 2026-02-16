@@ -240,7 +240,7 @@ const FHIRPage: React.FC = () => {
                   customStyle={{
                     margin: 0,
                     padding: '1.25rem',
-                    fontSize: '13px',
+                    fontSize: window.innerWidth < 640 ? '11px' : '13px',
                     maxHeight: '500px',
                     backgroundColor: 'transparent'
                   }}
@@ -307,7 +307,7 @@ const FHIRPage: React.FC = () => {
                   customStyle={{
                     margin: 0,
                     padding: '1.25rem',
-                    fontSize: '13px',
+                    fontSize: window.innerWidth < 640 ? '11px' : '13px',
                     maxHeight: '500px',
                     backgroundColor: 'transparent'
                   }}

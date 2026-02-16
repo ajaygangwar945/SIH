@@ -6,12 +6,16 @@ import {
   Search,
   Languages,
   FileCode,
-  Settings,
   Shield,
 
   BarChart3,
   X,
-  Activity
+  Activity,
+  Upload,
+  Download,
+  Users,
+  Database,
+  Sliders
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -21,13 +25,16 @@ interface SidebarProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
+  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Search & Browse', href: '/search', icon: Search },
   { name: 'Translation', href: '/translation', icon: Languages },
   { name: 'FHIR Operations', href: '/fhir', icon: FileCode },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
-  { name: 'Admin Panel', href: '/admin', icon: Settings },
+  { name: 'Upload Data', href: '/upload', icon: Upload },
+  { name: 'Export Resources', href: '/export', icon: Download },
+  { name: 'Admin Panel', href: '/admin', icon: Database },
+  { name: 'Users', href: '/users', icon: Users },
+  { name: 'Settings', href: '/settings', icon: Sliders },
   { name: 'Authentication', href: '/auth', icon: Shield },
-
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {

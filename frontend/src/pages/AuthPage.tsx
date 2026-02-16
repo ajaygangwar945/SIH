@@ -83,8 +83,8 @@ const AuthPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Authentication Form */}
+      <div className="space-y-6">
+        {/* Authentication Form (Full Width) */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
           <div className="flex items-center space-x-3 mb-6">
             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
@@ -98,12 +98,13 @@ const AuthPage: React.FC = () => {
 
           <div className="space-y-6">
             {/* ABHA ID Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="max-w-2xl">
+              <label htmlFor="abha-id-input" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Mock ABHA ID
               </label>
               <div className="flex space-x-2">
                 <input
+                  id="abha-id-input"
                   type="text"
                   value={abhaId}
                   onChange={(e) => setAbhaId(e.target.value)}
@@ -134,23 +135,25 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Authenticate Button */}
-            <button
-              onClick={handleAuthenticate}
-              disabled={authMutation.isLoading || !abhaId.trim()}
-              className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {authMutation.isLoading ? (
-                <>
-                  <div className="spinner"></div>
-                  <span>Authenticating...</span>
-                </>
-              ) : (
-                <>
-                  <Key className="h-4 w-4" />
-                  <span>Generate Access Token</span>
-                </>
-              )}
-            </button>
+            <div className="max-w-2xl">
+              <button
+                onClick={handleAuthenticate}
+                disabled={authMutation.isLoading || !abhaId.trim()}
+                className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed py-3"
+              >
+                {authMutation.isLoading ? (
+                  <>
+                    <div className="spinner"></div>
+                    <span>Authenticating...</span>
+                  </>
+                ) : (
+                  <>
+                    <Key className="h-4 w-4" />
+                    <span>Generate Access Token</span>
+                  </>
+                )}
+              </button>
+            </div>
 
             {/* Auth Result */}
             <AnimatePresence>
@@ -159,64 +162,67 @@ const AuthPage: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4"
+                  className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6"
                 >
-                  <div className="flex items-center space-x-2 mb-3">
+                  <div className="flex items-center space-x-2 mb-4">
                     <div className="p-1 bg-green-600 rounded">
                       <Check className="h-4 w-4 text-white" />
                     </div>
-                    <span className="font-medium text-green-800 dark:text-green-300">Authentication Successful</span>
+                    <span className="font-medium text-green-800 dark:text-green-300 text-lg">Authentication Successful</span>
                   </div>
 
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block text-sm font-medium text-green-700 dark:text-green-400 mb-1">
-                        Access Token
-                      </label>
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type={showToken ? 'text' : 'password'}
-                          value={authMutation.data.data.access_token}
-                          readOnly
-                          className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-green-300 dark:border-green-700 rounded-lg text-sm font-mono text-gray-900 dark:text-gray-100"
-                        />
-                        <button
-                          onClick={() => setShowToken(!showToken)}
-                          className="p-2 hover:bg-green-100 dark:hover:bg-green-900/40 rounded-lg transition-colors"
-                        >
-                          {showToken ? (
-                            <EyeOff className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          ) : (
-                            <Eye className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          )}
-                        </button>
-                        <button
-                          onClick={handleCopyToken}
-                          className="p-2 hover:bg-green-100 dark:hover:bg-green-900/40 rounded-lg transition-colors"
-                        >
-                          {copiedToken ? (
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          ) : (
-                            <Copy className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          )}
-                        </button>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-green-700 dark:text-green-400 mb-1">
+                          Access Token
+                        </label>
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type={showToken ? 'text' : 'password'}
+                            value={authMutation.data.data.access_token}
+                            readOnly
+                            aria-label="Access Token"
+                            className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-green-300 dark:border-green-700 rounded-lg text-sm font-mono text-gray-900 dark:text-gray-100"
+                          />
+                          <button
+                            onClick={() => setShowToken(!showToken)}
+                            className="p-2 hover:bg-green-100 dark:hover:bg-green-900/40 rounded-lg transition-colors"
+                          >
+                            {showToken ? (
+                              <EyeOff className="h-4 w-4 text-green-600 dark:text-green-400" />
+                            ) : (
+                              <Eye className="h-4 w-4 text-green-600 dark:text-green-400" />
+                            )}
+                          </button>
+                          <button
+                            onClick={handleCopyToken}
+                            className="p-2 hover:bg-green-100 dark:hover:bg-green-900/40 rounded-lg transition-colors"
+                          >
+                            {copiedToken ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+                            ) : (
+                              <Copy className="h-4 w-4 text-green-600 dark:text-green-400" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="font-medium text-green-700 dark:text-green-400">Scope:</span>
+                        <span className="ml-2 text-green-600 dark:text-green-300">{authMutation.data.data.scope}</span>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="font-medium text-green-700 dark:text-green-400">Token Type:</span>
-                        <span className="ml-2 text-green-600 dark:text-green-300">{authMutation.data.data.token_type}</span>
+                    <div className="grid grid-cols-2 gap-4 text-sm mt-auto">
+                      <div className="bg-white/50 dark:bg-black/20 p-3 rounded-lg border border-green-200/50 dark:border-green-700/50">
+                        <span className="block font-medium text-green-700 dark:text-green-400 mb-1">Token Type</span>
+                        <span className="text-green-600 dark:text-green-300 font-mono">{authMutation.data.data.token_type}</span>
                       </div>
-                      <div>
-                        <span className="font-medium text-green-700 dark:text-green-400">Expires In:</span>
-                        <span className="ml-2 text-green-600 dark:text-green-300">{authMutation.data.data.expires_in}s</span>
+                      <div className="bg-white/50 dark:bg-black/20 p-3 rounded-lg border border-green-200/50 dark:border-green-700/50">
+                        <span className="block font-medium text-green-700 dark:text-green-400 mb-1">Expires In</span>
+                        <span className="text-green-600 dark:text-green-300 font-mono">{authMutation.data.data.expires_in}s</span>
                       </div>
-                    </div>
-
-                    <div>
-                      <span className="font-medium text-green-700 dark:text-green-400">Scope:</span>
-                      <span className="ml-2 text-green-600 dark:text-green-300">{authMutation.data.data.scope}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -225,8 +231,8 @@ const AuthPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Information Panel */}
-        <div className="space-y-6">
+        {/* Information Grid (Bottom Row) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* ABHA Information */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
             <div className="flex items-center space-x-3 mb-4">
@@ -235,13 +241,13 @@ const AuthPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">About ABHA</h3>
-                <p className="text-gray-600 dark:text-gray-400">Ayushman Bharat Health Account</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Ayushman Bharat Health Account</p>
               </div>
             </div>
 
             <div className="space-y-4 text-sm text-gray-600 dark:text-gray-300">
               <p>
-                ABHA (Ayushman Bharat Health Account) is a unique 14-digit health ID that
+                ABHA is a unique 14-digit health ID that
                 allows you to digitally store all your health records.
               </p>
 
@@ -250,18 +256,8 @@ const AuthPage: React.FC = () => {
                 <ul className="space-y-1 list-disc list-inside">
                   <li>Unique health identifier</li>
                   <li>Digital health records storage</li>
-                  <li>Interoperability across health systems</li>
+                  <li>Interoperability with health systems</li>
                   <li>Consent-based data sharing</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-gray-200 mb-2">In This Demo:</h4>
-                <ul className="space-y-1 list-disc list-inside">
-                  <li>Mock ABHA ID generation</li>
-                  <li>JWT token simulation</li>
-                  <li>OAuth 2.0 flow demonstration</li>
-                  <li>Patient consent simulation</li>
                 </ul>
               </div>
             </div>
@@ -273,42 +269,34 @@ const AuthPage: React.FC = () => {
 
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                  1
-                </div>
+                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-200">Client Request</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Application requests access with ABHA ID</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-200">Client Request</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Application requests access with ABHA ID</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                  2
-                </div>
+                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-200">User Consent</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">User grants permission for data access</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-200">User Consent</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">User grants permission for data access</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                  3
-                </div>
+                <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-200">Token Generation</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Server generates JWT access token</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-200">Token Generation</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Server generates JWT access token</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                  4
-                </div>
+                <div className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold">4</div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-gray-200">API Access</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Client uses token for authenticated requests</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-200">API Access</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Client uses token for authenticated requests</p>
                 </div>
               </div>
             </div>
@@ -323,20 +311,24 @@ const AuthPage: React.FC = () => {
                 href="https://abdm.gov.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="flex items-center space-x-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-gray-600 transition-all group"
               >
-                <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">ABDM Official Website</span>
+                <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-md group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40">
+                  <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                </div>
+                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">ABDM Official</span>
               </a>
 
               <a
                 href="https://sandbox.abdm.gov.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="flex items-center space-x-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-gray-600 transition-all group"
               >
-                <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">ABDM Sandbox</span>
+                <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-md group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40">
+                  <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                </div>
+                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">ABDM Sandbox</span>
               </a>
             </div>
           </div>

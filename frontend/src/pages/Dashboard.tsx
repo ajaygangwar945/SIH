@@ -69,7 +69,7 @@ const Dashboard: React.FC = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden rounded-2xl shadow-lg">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-accent-600 to-secondary-600 opacity-90"></div>
-        <div className="relative bg-white bg-opacity-10 backdrop-blur-sm p-6 sm:p-8 text-white">
+        <div className="relative bg-white bg-opacity-10 backdrop-blur-sm p-5 sm:p-8 text-white">
           <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6 text-center sm:text-left">
             <div className="p-3 bg-white bg-opacity-20 rounded-xl shrink-0">
               <Stethoscope className="h-8 w-8" />

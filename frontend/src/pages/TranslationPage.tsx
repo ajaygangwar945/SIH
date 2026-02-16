@@ -86,7 +86,7 @@ const TranslationPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors">
         <div className="flex items-center space-x-3 mb-4">
           <div className="p-2 bg-accent-100 dark:bg-accent-900/30 rounded-lg">
             <Languages className="h-6 w-6 text-accent-600 dark:text-accent-400" />
@@ -216,27 +216,27 @@ const TranslationPage: React.FC = () => {
                     transition={{ delay: index * 0.1 }}
                     className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow dark:hover:bg-gray-700/30"
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="flex items-center space-x-4">
-                        <ArrowRight className="h-5 w-5 text-gray-400" />
+                        <ArrowRight className="h-5 w-5 text-gray-400 shrink-0 hidden sm:block" />
 
                         <div className={`p-2 rounded-lg bg-gradient-to-r ${translation.system === 'NAMASTE' ? 'from-green-500 to-green-600' : 'from-blue-500 to-blue-600'
                           }`}>
-                          <span className="text-white font-medium text-sm">
+                          <span className="text-white font-medium text-xs sm:text-sm">
                             {translation.system}
                           </span>
                         </div>
 
                         <div>
                           <p className="font-medium text-gray-900 dark:text-gray-100">{translation.code}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{translation.display}</p>
+                          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{translation.display}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center justify-end space-x-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-gray-100 dark:border-gray-700/50">
                         <button
                           onClick={() => handleCopy(translation.code)}
-                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                          className="p-2.5 sm:p-2 bg-gray-50 dark:bg-gray-700/50 sm:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors border sm:border-0 border-gray-200 dark:border-gray-600"
                           title="Copy code"
                         >
                           {copiedText === translation.code ? (
@@ -249,7 +249,7 @@ const TranslationPage: React.FC = () => {
                         {translation.system === 'ICD-11-TM2' && (
                           <button
                             onClick={() => window.open(`https://icd.who.int/browse11/l-m/en#/http://id.who.int/icd/entity/${translation.code}`, '_blank')}
-                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                            className="p-2.5 sm:p-2 bg-gray-50 dark:bg-gray-700/50 sm:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors border sm:border-0 border-gray-200 dark:border-gray-600"
                             title="View in ICD-11"
                           >
                             <ExternalLink className="h-4 w-4 text-gray-500 dark:text-gray-400" />

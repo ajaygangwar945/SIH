@@ -6,6 +6,7 @@ interface QuickStatsProps {
   data?: {
     totalTerms: number;
     categoryCount: number;
+    mappedTerms: number;
     indexSize: number;
     cacheStats: {
       keys: number;
@@ -23,8 +24,6 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
       icon: Database,
       color: 'text-blue-600',
       bgColor: 'bg-blue-100',
-      change: '+12%',
-      changeType: 'positive' as const
     },
     {
       title: 'Categories',
@@ -32,17 +31,13 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
       icon: Tag,
       color: 'text-green-600',
       bgColor: 'bg-green-100',
-      change: '+5%',
-      changeType: 'positive' as const
     },
     {
       title: 'Mapped Terms',
-      value: Math.floor((data?.totalTerms || 0) * 0.6), // Approximate
+      value: data?.mappedTerms || 0,
       icon: Link,
       color: 'text-purple-600',
       bgColor: 'bg-purple-100',
-      change: '+8%',
-      changeType: 'positive' as const
     },
     {
       title: 'Cache Hit Rate',
@@ -51,8 +46,6 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
       icon: TrendingUp,
       color: 'text-orange-600',
       bgColor: 'bg-orange-100',
-      change: '+3%',
-      changeType: 'positive' as const,
       suffix: '%'
     }
   ];
@@ -73,13 +66,6 @@ const QuickStats: React.FC<QuickStatsProps> = ({ data }) => {
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {stat.value.toLocaleString()}{stat.suffix || ''}
               </p>
-              <div className="flex items-center mt-1">
-                <span className={`text-xs font-medium ${stat.changeType === 'positive' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-                  }`}>
-                  {stat.change}
-                </span>
-                <span className="text-xs text-gray-500 dark:text-gray-500 ml-1">vs last week</span>
-              </div>
             </div>
             <div className={`p-3 rounded-lg ${stat.bgColor} dark:bg-opacity-20`}>
               <stat.icon className={`h-6 w-6 ${stat.color} dark:text-opacity-90`} />

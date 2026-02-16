@@ -180,7 +180,7 @@ const SearchPage: React.FC = () => {
           </div>
         )}
 
-        {error && (
+        {!!error && (
           <div className="p-8 text-center">
             <div className="text-red-600 mb-2 font-medium">Search failed</div>
             <p className="text-sm text-gray-600">Please try again</p>
@@ -242,17 +242,17 @@ const SearchPage: React.FC = () => {
                           </div>
                         )}
 
-                        <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-2 border-t border-gray-100 dark:border-gray-700/50">
-                          <div className="flex items-center text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex flex-wrap items-center gap-y-2 gap-x-3 pt-2 border-t border-gray-100 dark:border-gray-700/50">
+                          <div className="flex items-center text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 px-2 py-0.5 rounded">
                             <span className="font-semibold mr-1">ID:</span> {result.term.id}
                           </div>
                           {result.term.icd11_tm2_code && (
-                            <div className="flex items-center text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">
                               <span className="font-semibold mr-1">ICD-11:</span> {result.term.icd11_tm2_code}
                             </div>
                           )}
                           {result.term.references && (
-                            <div className="flex items-center text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded">
                               <span className="font-semibold mr-1">Ref:</span> {result.term.references}
                             </div>
                           )}
